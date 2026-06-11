@@ -6,7 +6,7 @@ The workflow has three main blocks:
 
 1. **Simulation experiments** validating ABI-DAGAR under the proposed Poisson-DAGAR boundary-detection model. These include parameter recovery, posterior calibration, boundary-probability diagnostics, posterior predictive checks, the model-matched MCMC-DAGAR benchmark, computation summaries, and the ablation study of summary statistics.
 2. **Real-data analyses** applying the trained ABI-DAGAR approximation to the Glasgow respiratory disease and California lung cancer datasets, with comparisons against `CARBayes` and a model-matched MCMC-DAGAR sampler.
-3. **Supplementary sensitivity analyses** including ABI-CAR, a Leroux-CAR version of the amortized workflow with rho fixed at 0.99 as in Lee and Mitchell (2012).
+3. **Supplementary diagnostics and benchmark analyses** extending the main validation with additional calibration plots, posterior predictive checks, ablation summaries, runtime summaries, and real-data model-matched MCMC-DAGAR comparisons.
 
 Figures are stored next to the analysis block that generated them, not in a single global image folder. Numerical summaries for manuscript and supplementary tables are stored in the CSV outputs listed below.
 
@@ -32,10 +32,6 @@ To keep the README readable, the output tables below use these path shortcuts.
 | `$DAGAR_SETUP` | `Real Data Analysis/setup_and_diagnostics/DAGARBayes` |
 | `$REAL_CAR` | `Real Data Analysis/results_ABI_vs_CARBayes` |
 | `$REAL_DAGAR` | `Real Data Analysis/results_ABI_vs_DAGARBayes` |
-| `$CARABI_SIM` | `Simulation Experiments/CAR_validation` |
-| `$CARABI_REAL` | `Real Data Analysis/results_CARABI_vs_CARBayes` |
-
-The ABI-CAR folders are local sensitivity-output folders and are ignored by default in the public repository configuration.
 
 ### Recommended order of execution
 
@@ -251,37 +247,6 @@ Numerical summary sources:
 | Supplement ABI-DAGAR versus MCMC-DAGAR posterior-summary table | `$REAL_DAGAR/glasgow/parameter_summary_comparison.csv`; `$REAL_DAGAR/california/parameter_summary_comparison.csv`; MCMC inputs in `$DAGAR_SETUP/glasgow` and `$DAGAR_SETUP/california` |
 | Supplement ABI-DAGAR versus MCMC-DAGAR agreement table | `$REAL_DAGAR/combined_edge_metrics.csv`; `$REAL_DAGAR/glasgow/edge_metrics.csv`; `$REAL_DAGAR/california/edge_metrics.csv` |
 
-### 7. Run the ABI-CAR sensitivity analysis
-
-The ABI-CAR analysis is an additional sensitivity experiment. It repeats the amortized Bayesian workflow under a localized Leroux CAR prior with rho fixed at 0.99, matching the spatial-dependence specification used by Lee and Mitchell (2012) and the `CARBayes` benchmark.
-
-Local files for this block:
-
-| File | Role |
-| --- | --- |
-| `$TRAIN/ABI_poisson_regression_CAR.ipynb` | Trains the ABI-CAR network. |
-| `$SIM/simulation_more_detailed_car.ipynb` | Validates ABI-CAR on held-out simulated datasets. |
-| `$REAL/CARBayes_vs_CARABI_real_data.ipynb` | Compares ABI-CAR with `CARBayes` on Glasgow and California. |
-
-These ABI-CAR notebooks and outputs are local sensitivity files and are ignored by default in the current public repository configuration.
-
-Supplementary figures:
-
-| Folder | File | Used in |
-| --- | --- | --- |
-| `$CARABI_SIM/Images` | `poisson_car_recovery.png` | Supplement Fig. S15 |
-| `$CARABI_SIM/Images` | `parameter_coverage_curve_car.png` | Supplement Fig. S15 |
-| `$CARABI_REAL/glasgow` | `glasgow_boundary_agreement_carabi.png` | Supplement Fig. S16 |
-| `$CARABI_REAL/california` | `california_boundary_agreement_carabi.png` | Supplement Fig. S16 |
-
-Numerical summary sources:
-
-| Result | Source files |
-| --- | --- |
-| Supplement ABI-CAR parameter-recovery table | Outputs from `$SIM/simulation_more_detailed_car.ipynb`, including local `$CARABI_SIM` CSV summaries |
-| Supplement ABI-CAR versus `CARBayes` posterior-summary table | Local `$CARABI_REAL/glasgow/parameter_summary_comparison.csv`; local `$CARABI_REAL/california/parameter_summary_comparison.csv` |
-| Supplement ABI-CAR boundary and fitted-risk agreement table | Local `$CARABI_REAL/combined_edge_metrics.csv`; local `$CARABI_REAL/combined_risk_metrics.csv`; per-dataset `edge_metrics.csv` and `risk_metrics.csv` |
-
 ### Main manuscript output index
 
 | Item | Folder | File(s) | Contents |
@@ -323,8 +288,6 @@ Numerical summary sources:
 | Fig. S12 | `$REAL_CAR/glasgow`; `$REAL_CAR/california` | `glasgow_risk_comparison.png`; `california_risk_comparison.png` | Fitted-risk comparison between ABI-DAGAR and `CARBayes`. |
 | Fig. S13 | `$REAL_CAR/glasgow`; `$REAL_CAR/california` | `glasgow_edge_probability_vs_dissimilarity.png`; `california_edge_probability_vs_dissimilarity.png` | Posterior boundary probability versus standardized edge dissimilarity. |
 | Fig. S14 | `$REAL_DAGAR/glasgow`; `$REAL_DAGAR/california` | `glasgow_boundary_agreement_dagarbayes.png`; `california_boundary_agreement_dagarbayes.png` | Boundary agreement between ABI-DAGAR and model-matched MCMC-DAGAR. |
-| Fig. S15 | `$CARABI_SIM/Images` | `poisson_car_recovery.png`; `parameter_coverage_curve_car.png` | ABI-CAR simulation diagnostics; local sensitivity outputs ignored by default. |
-| Fig. S16 | `$CARABI_REAL/glasgow`; `$CARABI_REAL/california` | `glasgow_boundary_agreement_carabi.png`; `california_boundary_agreement_carabi.png` | Boundary agreement between ABI-CAR and `CARBayes`; local sensitivity outputs ignored by default. |
 
 ### Supplementary table sources
 
@@ -339,9 +302,6 @@ Numerical summary sources:
 | Table S7 | `$REAL/DAGARBayes_vs_ABI_real_data.ipynb` | `$REAL_DAGAR/combined_edge_metrics.csv`; `$REAL_DAGAR/glasgow/edge_metrics.csv`; `$REAL_DAGAR/california/edge_metrics.csv` |
 | Table S8 | `$REAL/CARBayes_california_glasgow.R`; `$REAL/CARBayes_vs_ABI_real_data.ipynb` | Runtime values printed by the corresponding R script and notebook cells |
 | Table S9 | `$TRAIN/ABI_poisson_regression_DAGAR.ipynb` | Network architecture, software versions, training settings, and `$TRAIN/training_history.csv` |
-| Table S10 | `$TRAIN/ABI_poisson_regression_CAR.ipynb`; `$SIM/simulation_more_detailed_car.ipynb` | Local ABI-CAR validation CSV outputs under `$CARABI_SIM` |
-| Table S11 | `$REAL/CARBayes_vs_CARABI_real_data.ipynb` | Local `$CARABI_REAL/glasgow/parameter_summary_comparison.csv`; local `$CARABI_REAL/california/parameter_summary_comparison.csv` |
-| Table S12 | `$REAL/CARBayes_vs_CARABI_real_data.ipynb` | Local `$CARABI_REAL/combined_edge_metrics.csv`; local `$CARABI_REAL/combined_risk_metrics.csv`; per-dataset local `edge_metrics.csv` and `risk_metrics.csv` |
 
 ### Finding outputs quickly
 
