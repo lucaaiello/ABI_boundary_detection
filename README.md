@@ -1,444 +1,227 @@
-# Amortized Bayesian Inference for Spatial Boundary Detection
+## Reproducing the manuscript results
 
-This repository contains the code and selected outputs for an amortized
-Bayesian inference workflow for Poisson areal count data with spatial boundary
-detection. The main implementation trains a reusable neural posterior
-approximator for a localized DAGAR model and evaluates it through simulation
-experiments, model-matched MCMC benchmarks, ablation studies, and real-data
-applications to the Glasgow respiratory disease data and the California lung
-cancer data.
+This repository contains the code used to reproduce all results reported in the manuscript and Supplementary Materials for *Amortized Bayesian Boundary Detection on Varying-Size Graphs*. The analyses follow the same order as the paper: first train the ABI-DAGAR amortized posterior approximation, then validate it on held-out simulated datasets, then compare it with model-matched MCMC-DAGAR and `CARBayes`, and finally run the additional ablation and ABI-CAR sensitivity analyses.
 
-The short version: if you want to understand what produced a result in the
-paper, start from the map below. The repository is organized around the same
-story as the manuscript:
+The final figures used in the manuscript and Supplementary Materials are stored in the `Images/` folder. The numerical values reported in tables are contained in the corresponding LaTeX source files, `main.tex` and `supplementary.tex`, and are produced by the simulation, benchmark, posterior predictive, ablation, and real-data analysis code in this repository.
 
-1. Train one amortized posterior approximator.
-2. Validate it on simulated areal graphs.
-3. Benchmark it against model-matched MCMC.
-4. Check which engineered summaries matter through ablations.
-5. Deploy the trained approximator on real data and compare with CARBayes and
-   DAGARBayes reference analyses.
+### Recommended order of execution
 
-## Project at a Glance
+The code should be run in the following order.
 
-The statistical target is posterior inference for
+#### 1. Train the ABI-DAGAR amortized posterior approximation
 
-```text
-(beta_0, sigma_w^2, eta, rho)
+Run the ABI-DAGAR training code first. This step simulates training datasets from the Poisson-DAGAR boundary-detection model and trains the SetTransformer summary network and conditional normalizing flow.
+
+This step produces the trained amortized posterior approximation and the training-history output used in the manuscript.
+
+Main output:
+
+| Output                    | Used in                |
+| ------------------------- | ---------------------- |
+| `Images/history_plot.png` | Main manuscript Fig. 1 |
+
+#### 2. Run held-out ABI-DAGAR simulation validation
+
+After training, run the held-out simulation validation. This step applies the trained amortized posterior approximation to 200 held-out simulated datasets and computes parameter recovery, posterior calibration, posterior boundary probabilities, posterior predictive checks, and computational summaries.
+
+Main manuscript outputs from this step:
+
+| Output                                            | Used in                 |
+| ------------------------------------------------- | ----------------------- |
+| `Images/poisson_dagar_recovery.png`               | Main manuscript Fig. 2  |
+| `Images/poisson_dagar_calibration_histogram.png`  | Main manuscript Fig. 3  |
+| `Images/boundary_sens_spec_curve.png`             | Main manuscript Fig. 4  |
+| `Images/boundary_mpm_histograms.png`              | Main manuscript Fig. 5  |
+| Table values for `tab:sim_recovery` in `main.tex` | Main manuscript Table 1 |
+
+Supplementary outputs from this step:
+
+| Output                                                         | Used in             |
+| -------------------------------------------------------------- | ------------------- |
+| `Images/parameter_coverage_curve.png`                          | Supplement Fig. S1  |
+| `Images/poisson_dagar_calibration_ecdf.png`                    | Supplement Fig. S2  |
+| `Images/graph_size_posterior_zscores.png`                      | Supplement Fig. S3  |
+| `Images/regime_specific_parameter_errors.png`                  | Supplement Fig. S4  |
+| `Images/boundary_probability_quality.png`                      | Supplement Fig. S5  |
+| `Images/predictive_checks.png`                                 | Supplement Fig. S6  |
+| Table values for `tab:sim_boundary_sup` in `supplementary.tex` | Supplement Table S1 |
+| Table values for `tab:sim_ppc_sup` in `supplementary.tex`      | Supplement Table S2 |
+| Table values for `tab:sim_computation` in `supplementary.tex`  | Supplement Table S3 |
+
+#### 3. Run the model-matched MCMC-DAGAR simulation benchmark
+
+Next, run the MCMC-DAGAR benchmark on the additional bank of 100 held-out simulated datasets. This benchmark compares ABI-DAGAR with a dataset-specific MCMC sampler targeting the same thresholded Poisson-DAGAR model.
+
+Main manuscript outputs from this step:
+
+| Output                                            | Used in                |
+| ------------------------------------------------- | ---------------------- |
+| `Images/parameter_recovery_bars.png`              | Main manuscript Fig. 6 |
+| `Images/parameter_recovery_truth_scatter.png`     | Main manuscript Fig. 7 |
+| `Images/parameter_recovery_agreement_scatter.png` | Main manuscript Fig. 7 |
+| `Images/parameter_bias_interval_boxplots.png`     | Main manuscript Fig. 7 |
+
+Supplementary outputs from this step:
+
+| Output                            | Used in            |
+| --------------------------------- | ------------------ |
+| `Images/boundary_metric_bars.png` | Supplement Fig. S7 |
+| `Images/runtime_comparison.png`   | Supplement Fig. S7 |
+
+#### 4. Run the summary-statistic ablation study
+
+The ablation study should be run after the baseline ABI-DAGAR validation, because all ablated representations are compared with the full-summary baseline. For each summary representation, a separate amortized posterior approximator is retrained from scratch using the same network architecture and training protocol, and all runs are evaluated on the same validation datasets.
+
+Outputs from this step:
+
+| Output                                   | Used in             |
+| ---------------------------------------- | ------------------- |
+| `Images/ablation_recovery_heatmaps.png`  | Supplement Fig. S8  |
+| `Images/ablation_boundary_heatmaps.png`  | Supplement Fig. S9  |
+| `Images/ablation_training_histories.png` | Supplement Fig. S10 |
+
+#### 5. Run the real-data ABI-DAGAR analyses and `CARBayes` benchmark
+
+After validating the trained ABI-DAGAR amortizer on simulated datasets, apply the same trained network to the Glasgow respiratory disease and California lung cancer datasets. Then run the localized `CARBayes` benchmark on the same datasets using the same standardized dissimilarity covariates.
+
+Main manuscript outputs from this step:
+
+| Output                                                             | Used in                                             |
+| ------------------------------------------------------------------ | --------------------------------------------------- |
+| `Images/glasgow_boundary_agreement.png`                            | Main manuscript real-data boundary agreement figure |
+| `Images/california_boundary_agreement.png`                         | Main manuscript real-data boundary agreement figure |
+| Table values for `tab:carbayes-parameter-comparison` in `main.tex` | Main manuscript Table 2                             |
+| Table values for `tab:carbayes-agreement` in `main.tex`            | Main manuscript Table 3                             |
+
+Supplementary outputs from this step:
+
+| Output                                                               | Used in             |
+| -------------------------------------------------------------------- | ------------------- |
+| `Images/glasgow_post_pred_check.png`                                 | Supplement Fig. S11 |
+| `Images/california_post_pred_check.png`                              | Supplement Fig. S11 |
+| `Images/glasgow_risk_comparison.png`                                 | Supplement Fig. S12 |
+| `Images/california_risk_comparison.png`                              | Supplement Fig. S12 |
+| `Images/glasgow_edge_probability_vs_dissimilarity.png`               | Supplement Fig. S13 |
+| `Images/california_edge_probability_vs_dissimilarity.png`            | Supplement Fig. S13 |
+| Table values for `tab:realdata_risk_extra` in `supplementary.tex`    | Supplement Table S4 |
+| Table values for `tab:realdata_edge_extra` in `supplementary.tex`    | Supplement Table S5 |
+| Table values for `tab:realdata_runtime_extra` in `supplementary.tex` | Supplement Table S8 |
+
+#### 6. Run the real-data model-matched MCMC-DAGAR benchmark
+
+The real-data MCMC-DAGAR benchmark compares ABI-DAGAR with a dataset-specific MCMC implementation of the same DAGAR boundary model. This step is separate from the external `CARBayes` benchmark and is used to distinguish model-class differences from amortization error.
+
+Outputs from this step:
+
+| Output                                                                 | Used in             |
+| ---------------------------------------------------------------------- | ------------------- |
+| `Images/glasgow_boundary_agreement_dagarbayes.png`                     | Supplement Fig. S14 |
+| `Images/california_boundary_agreement_dagarbayes.png`                  | Supplement Fig. S14 |
+| Table values for MCMC-DAGAR posterior summaries in `supplementary.tex` | Supplement Table S6 |
+| Table values for `tab:mcmc_dagar_agreement` in `supplementary.tex`     | Supplement Table S7 |
+
+#### 7. Run the ABI-CAR sensitivity analysis
+
+The ABI-CAR analysis is an additional sensitivity experiment. It repeats the amortized Bayesian workflow under a localized Leroux CAR prior matching the spatial-dependence specification used by Lee and Mitchell (2012) and the `CARBayes` benchmark. This analysis serves as a positive-control experiment: when the amortized model is aligned with the localized CAR prior, the resulting boundary conclusions closely reproduce the `CARBayes` benchmark.
+
+Outputs from this step:
+
+| Output                                                                             | Used in              |
+| ---------------------------------------------------------------------------------- | -------------------- |
+| `Images/poisson_car_recovery.png`                                                  | Supplement Fig. S15  |
+| `Images/parameter_coverage_curve_car.png`                                          | Supplement Fig. S15  |
+| `Images/glasgow_boundary_agreement_car.png`                                        | Supplement Fig. S16  |
+| `Images/california_boundary_agreement_car.png`                                     | Supplement Fig. S16  |
+| Table values for `tab:supp_abicar_recovery` in `supplementary.tex`                 | Supplement Table S10 |
+| Table values for ABI-CAR real-data posterior summaries in `supplementary.tex`      | Supplement Table S11 |
+| Table values for ABI-CAR boundary and fitted-risk agreement in `supplementary.tex` | Supplement Table S12 |
+
+#### 8. Compile the manuscript and Supplementary Materials
+
+After the figures and numerical summaries have been generated, compile `main.tex` and `supplementary.tex`. The manuscript and supplement read the final figures from the `Images/` folder. The table values are included directly in the LaTeX source files.
+
+Because the main manuscript and supplement use cross-references between files, compile both documents enough times for cross-references to resolve correctly.
+
+### Output index
+
+The following tables provide a direct index between the manuscript outputs and the corresponding files in the repository.
+
+#### Main manuscript figures
+
+| Manuscript item                     | File(s) in repository                                                                                                                           | Contents                                                                                            |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Fig. 1                              | `Images/history_plot.png`                                                                                                                       | Training loss over 100 epochs for the amortized posterior approximation.                            |
+| Fig. 2                              | `Images/poisson_dagar_recovery.png`                                                                                                             | Parameter recovery on 200 held-out simulated datasets.                                              |
+| Fig. 3                              | `Images/poisson_dagar_calibration_histogram.png`                                                                                                | Simulation-based calibration rank histograms for the four model parameters.                         |
+| Fig. 4                              | `Images/boundary_sens_spec_curve.png`                                                                                                           | Sensitivity and specificity as functions of the number of selected boundaries.                      |
+| Fig. 5                              | `Images/boundary_mpm_histograms.png`                                                                                                            | Sensitivity and specificity under the median-probability rule.                                      |
+| Fig. 6                              | `Images/parameter_recovery_bars.png`                                                                                                            | ABI-DAGAR versus model-matched MCMC-DAGAR: mean absolute error and empirical 95% interval coverage. |
+| Fig. 7                              | `Images/parameter_recovery_truth_scatter.png`; `Images/parameter_recovery_agreement_scatter.png`; `Images/parameter_bias_interval_boxplots.png` | Detailed parameter-level comparison between ABI-DAGAR and model-matched MCMC-DAGAR.                 |
+| Real-data boundary agreement figure | `Images/glasgow_boundary_agreement.png`; `Images/california_boundary_agreement.png`                                                             | Boundary agreement between ABI-DAGAR and `CARBayes` in the Glasgow and California applications.     |
+
+#### Main manuscript tables
+
+| Manuscript item | Location in source                                          | Contents                                                                                                                   |
+| --------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Table 1         | `main.tex`, table label `tab:sim_recovery`                  | Parameter recovery on 200 held-out simulated datasets: bias, RMSE, Pearson correlation, (R^2), and empirical 95% coverage. |
+| Table 2         | `main.tex`, table label `tab:carbayes-parameter-comparison` | Posterior medians and 95% credible intervals for ABI-DAGAR and `CARBayes` in the Glasgow and California applications.      |
+| Table 3         | `main.tex`, table label `tab:carbayes-agreement`            | Edge-level and fitted-risk agreement between ABI-DAGAR and `CARBayes` under the median-probability rule.                   |
+
+#### Supplementary figures
+
+| Supplement item | File(s) in repository                                                                                             | Contents                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Fig. S1         | `Images/parameter_coverage_curve.png`                                                                             | Empirical coverage versus nominal coverage for the amortized posterior approximation.                                    |
+| Fig. S2         | `Images/poisson_dagar_calibration_ecdf.png`                                                                       | Simulation-based calibration ECDF-difference plots.                                                                      |
+| Fig. S3         | `Images/graph_size_posterior_zscores.png`                                                                         | Posterior (z)-scores stratified by graph-size bin.                                                                       |
+| Fig. S4         | `Images/regime_specific_parameter_errors.png`                                                                     | Mean absolute recovery error by true (\rho), true (\eta), graph size, and edge count.                                    |
+| Fig. S5         | `Images/boundary_probability_quality.png`                                                                         | Boundary-probability reliability and dissimilarity-profile diagnostics.                                                  |
+| Fig. S6         | `Images/predictive_checks.png`                                                                                    | Posterior predictive diagnostics for counts, Moran-type summaries, edge contrasts, and the implied number of boundaries. |
+| Fig. S7         | `Images/boundary_metric_bars.png`; `Images/runtime_comparison.png`                                                | Additional ABI-DAGAR and MCMC-DAGAR benchmark diagnostics and runtime comparison.                                        |
+| Fig. S8         | `Images/ablation_recovery_heatmaps.png`                                                                           | Parameter-specific recovery metrics for the ablation study.                                                              |
+| Fig. S9         | `Images/ablation_boundary_heatmaps.png`                                                                           | Boundary-detection diagnostics across summary representations.                                                           |
+| Fig. S10        | `Images/ablation_training_histories.png`                                                                          | Training and validation loss trajectories for the baseline and ablated summary representations.                          |
+| Fig. S11        | `Images/glasgow_post_pred_check.png`; `Images/california_post_pred_check.png`                                     | Posterior predictive checks for the Glasgow and California real-data applications.                                       |
+| Fig. S12        | `Images/glasgow_risk_comparison.png`; `Images/california_risk_comparison.png`                                     | Fitted-risk comparison between ABI-DAGAR and `CARBayes`.                                                                 |
+| Fig. S13        | `Images/glasgow_edge_probability_vs_dissimilarity.png`; `Images/california_edge_probability_vs_dissimilarity.png` | Posterior boundary probability versus standardized edge dissimilarity.                                                   |
+| Fig. S14        | `Images/glasgow_boundary_agreement_dagarbayes.png`; `Images/california_boundary_agreement_dagarbayes.png`         | Boundary agreement between ABI-DAGAR and the model-matched MCMC-DAGAR benchmark.                                         |
+| Fig. S15        | `Images/poisson_car_recovery.png`; `Images/parameter_coverage_curve_car.png`                                      | ABI-CAR simulation diagnostics.                                                                                          |
+| Fig. S16        | `Images/glasgow_boundary_agreement_car.png`; `Images/california_boundary_agreement_car.png`                       | Boundary agreement between ABI-CAR and `CARBayes`.                                                                       |
+
+#### Supplementary tables
+
+| Supplement item | Location in source                                                                                | Contents                                                                                 |
+| --------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Table S1        | `supplementary.tex`, table label `tab:sim_boundary_sup`                                           | Additional boundary-probability summaries on held-out simulated datasets.                |
+| Table S2        | `supplementary.tex`, table label `tab:sim_ppc_sup`                                                | Additional posterior predictive summaries on held-out simulated datasets.                |
+| Table S3        | `supplementary.tex`, table label `tab:sim_computation`                                            | Computational details for the simulation study.                                          |
+| Table S4        | `supplementary.tex`, table label `tab:realdata_risk_extra`                                        | Additional fitted-risk comparison metrics between ABI-DAGAR and `CARBayes`.              |
+| Table S5        | `supplementary.tex`, table label `tab:realdata_edge_extra`                                        | Additional boundary-probability comparison metrics between ABI-DAGAR and `CARBayes`.     |
+| Table S6        | `supplementary.tex`, subsection `Additional comparison with a model-matched MCMC-DAGAR benchmark` | Posterior medians and 95% credible intervals for ABI-DAGAR and model-matched MCMC-DAGAR. |
+| Table S7        | `supplementary.tex`, table label `tab:mcmc_dagar_agreement`                                       | Agreement between ABI-DAGAR and model-matched MCMC-DAGAR.                                |
+| Table S8        | `supplementary.tex`, table label `tab:realdata_runtime_extra`                                     | Real-data posterior sampling runtimes for ABI-DAGAR and `CARBayes`.                      |
+| Table S9        | `supplementary.tex`, table label `tab:supp_network_impl`                                          | Neural-network and training configuration for the ABI-DAGAR implementation.              |
+| Table S10       | `supplementary.tex`, table label `tab:supp_abicar_recovery`                                       | ABI-CAR parameter recovery on 200 held-out simulated datasets.                           |
+| Table S11       | `supplementary.tex`, subsection `Real-data comparison with CARBayes`                              | Posterior medians and 95% credible intervals for ABI-CAR and `CARBayes`.                 |
+| Table S12       | `supplementary.tex`, subsection `Real-data comparison with CARBayes`                              | Boundary and fitted-risk agreement between ABI-CAR and `CARBayes`.                       |
+
+### Locating outputs from the command line
+
+The final figure files can be found directly in the `Images/` folder. The numerical table entries can be located in the LaTeX source by searching for the table labels listed above, for example:
+
+```bash
+grep -n "tab:sim_recovery" main.tex
+grep -n "tab:carbayes-agreement" main.tex
+grep -n "tab:sim_boundary_sup" supplementary.tex
+grep -n "tab:supp_network_impl" supplementary.tex
 ```
 
-where `beta_0` is the global log-risk level, `sigma_w^2` is the latent spatial
-variance, `eta` controls covariate-driven boundary formation, and `rho` controls
-residual DAGAR spatial dependence. Boundary probabilities are derived from the
-posterior draws by applying the edge-deletion mechanism to each neighboring
-pair.
+Similarly, figure files can be located from the LaTeX source by searching for the corresponding image name or figure label, for example:
 
-The main trained model is the ABI-DAGAR network stored at:
-
-```text
-Training/Checkpoints/poisson_dagar.keras
+```bash
+grep -n "poisson_dagar_recovery.png" main.tex
+grep -n "boundary_probability_quality.png" supplementary.tex
+grep -n "glasgow_boundary_agreement.png" main.tex supplementary.tex
 ```
 
-The core training notebook is:
-
-```text
-Training/ABI_poisson_regression_DAGAR.ipynb
-```
-
-## Repository Layout
-
-```text
-ABI_poisson_regression/
-|-- Training/
-|   |-- ABI_poisson_regression_DAGAR.ipynb
-|   |-- training_history.csv
-|   |-- Checkpoints/
-|   |   `-- poisson_dagar.keras
-|   `-- Images/
-|       `-- history_plot.png
-|
-|-- Simulation Experiments/
-|   |-- simulation_more_detailed.ipynb
-|   |-- Images/
-|   |-- ABI_vs_MCMC/
-|   `-- Ablation_experiments/
-|
-|-- Real Data Analysis/
-|   |-- Data/
-|   |-- CARBayes_california_glasgow.R
-|   |-- DAGARBayes_california_glasgow.R
-|   |-- dagar_poisson_boundary_mwg.cpp
-|   |-- CARBayes_vs_ABI_real_data.ipynb
-|   |-- DAGARBayes_vs_ABI_real_data.ipynb
-|   |-- setup_and_diagnostics/
-|   |-- results_ABI_vs_CARBayes/
-|   `-- results_ABI_vs_DAGARBayes/
-|
-`-- .gitignore
-```
-
-Some exploratory files and heavier intermediate artifacts are intentionally
-ignored. The public-facing tree keeps the files needed to reproduce the
-manuscript results and the selected outputs used in the text.
-
-## Main Workflow
-
-### 1. Train the ABI-DAGAR posterior approximator
-
-Entry point:
-
-```text
-Training/ABI_poisson_regression_DAGAR.ipynb
-```
-
-This notebook defines the simulator, summary construction, BayesFlow workflow,
-summary network, and inference network. The trained approximator uses a
-SetTransformer summary network and a spline CouplingFlow inference network.
-
-Primary outputs:
-
-```text
-Training/Checkpoints/poisson_dagar.keras
-Training/training_history.csv
-Training/Images/history_plot.png
-```
-
-The manuscript reports the one-time training stage and then treats the saved
-checkpoint as the reusable posterior approximator for all downstream analyses.
-
-### 2. Run the main simulation validation
-
-Entry point:
-
-```text
-Simulation Experiments/simulation_more_detailed.ipynb
-```
-
-This notebook evaluates the trained ABI-DAGAR network on held-out simulated
-datasets with varying graph sizes and topologies. It produces parameter
-recovery, posterior calibration, boundary-probability diagnostics, decision-rule
-diagnostics, posterior predictive checks, and runtime summaries.
-
-Primary figure outputs:
-
-```text
-Simulation Experiments/Images/history_plot.png
-Simulation Experiments/Images/poisson_dagar_recovery.png
-Simulation Experiments/Images/poisson_dagar_calibration_histogram.png
-Simulation Experiments/Images/poisson_dagar_calibration_ecdf.png
-Simulation Experiments/Images/parameter_coverage_curve.png
-Simulation Experiments/Images/boundary_sens_spec_curve.png
-Simulation Experiments/Images/boundary_mpm_histograms.png
-Simulation Experiments/Images/boundary_probability_quality.png
-Simulation Experiments/Images/predictive_checks.png
-Simulation Experiments/Images/graph_size_posterior_zscores.png
-Simulation Experiments/Images/regime_specific_parameter_errors.png
-```
-
-Selected table outputs:
-
-```text
-Simulation Experiments/boundary_mpm_results.csv
-Simulation Experiments/boundary_mpm_summary.csv
-```
-
-### 3. Compare ABI with model-matched MCMC
-
-Folder:
-
-```text
-Simulation Experiments/ABI_vs_MCMC/
-```
-
-This folder contains the model-matched simulation benchmark used to compare the
-trained ABI-DAGAR posterior approximation with a DAGAR MCMC sampler on the same
-synthetic datasets.
-
-Key files:
-
-```text
-Simulation Experiments/ABI_vs_MCMC/export_benchmark_datasets.py
-Simulation Experiments/ABI_vs_MCMC/benchmark_utils.py
-Simulation Experiments/ABI_vs_MCMC/dagar_poisson_boundary_mwg.cpp
-Simulation Experiments/ABI_vs_MCMC/run_abi_benchmark.ipynb
-Simulation Experiments/ABI_vs_MCMC/run_mcmc_benchmark.R
-Simulation Experiments/ABI_vs_MCMC/compare_abi_vs_mcmc.ipynb
-```
-
-Recommended order if regenerating from scratch:
-
-1. `export_benchmark_datasets.py` creates the fixed benchmark bank.
-2. `run_abi_benchmark.ipynb` applies the trained ABI checkpoint to that bank.
-3. `run_mcmc_benchmark.R` runs the model-matched DAGAR MCMC benchmark.
-4. `compare_abi_vs_mcmc.ipynb` compares parameter recovery, boundary recovery,
-   uncertainty, runtime, and break-even behavior.
-
-The comparison notebook reads from:
-
-```text
-Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/
-|-- abi_results_all100/
-|-- mcmc_results_all100/
-`-- datasets/
-```
-
-It writes manuscript-ready outputs to:
-
-```text
-Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/comparison_abi_vs_mcmc/
-```
-
-Important plot outputs include:
-
-```text
-comparison_abi_vs_mcmc/plots/parameter_recovery_truth_scatter.png
-comparison_abi_vs_mcmc/plots/parameter_recovery_agreement_scatter.png
-comparison_abi_vs_mcmc/plots/parameter_bias_interval_boxplots.png
-comparison_abi_vs_mcmc/plots/boundary_metric_bars.png
-comparison_abi_vs_mcmc/plots/runtime_comparison.png
-```
-
-### 4. Run the summary-statistic ablation study
-
-Folder:
-
-```text
-Simulation Experiments/Ablation_experiments/
-```
-
-The ablation study evaluates whether each group of engineered summaries
-contributes to posterior recovery and boundary detection. The baseline uses the
-full summary representation. The ablations remove one block at a time or retain
-only the core observation features.
-
-Training notebooks:
-
-```text
-Simulation Experiments/Ablation_experiments/Training/00_baseline/train_baseline.ipynb
-Simulation Experiments/Ablation_experiments/Training/01_ablate_core_observation_features/train_ablate_core_observation_features.ipynb
-Simulation Experiments/Ablation_experiments/Training/02_ablate_graph_topology_features/train_ablate_graph_topology_features.ipynb
-Simulation Experiments/Ablation_experiments/Training/03_ablate_dissimilarity_features/train_ablate_dissimilarity_features.ipynb
-Simulation Experiments/Ablation_experiments/Training/04_ablate_local_spatial_features/train_ablate_local_spatial_features.ipynb
-Simulation Experiments/Ablation_experiments/Training/05_ablate_global_graph_features/train_ablate_global_graph_features.ipynb
-Simulation Experiments/Ablation_experiments/Training/06_core_observation_only/train_core_observation_only.ipynb
-```
-
-Comparison notebook:
-
-```text
-Simulation Experiments/Ablation_experiments/Results/compare_ablation_networks.ipynb
-```
-
-This notebook evaluates all available ablation checkpoints on the same shared
-validation bank, including the 4050-dataset validation design with roughly 50
-datasets for each graph size `N = 40, ..., 120`.
-
-Main output folder:
-
-```text
-Simulation Experiments/Ablation_experiments/Results/comparison_outputs/
-```
-
-Important plots:
-
-```text
-comparison_outputs/Images/ablation_overall_summary.png
-comparison_outputs/Images/ablation_recovery_heatmaps.png
-comparison_outputs/Images/ablation_delta_vs_baseline_heatmaps.png
-comparison_outputs/Images/ablation_boundary_heatmaps.png
-comparison_outputs/Images/ablation_boundary_delta_vs_baseline_heatmaps.png
-comparison_outputs/Images/ablation_training_histories.png
-```
-
-Important tables:
-
-```text
-comparison_outputs/Tables/overall_ablation_summary.csv
-comparison_outputs/Tables/parameter_recovery_summary_display_parameters.csv
-comparison_outputs/Tables/parameter_recovery_vs_baseline.csv
-comparison_outputs/Tables/boundary_metric_summary.csv
-comparison_outputs/Tables/boundary_metric_vs_baseline.csv
-```
-
-### 5. Real-data deployment and benchmark comparison
-
-Folder:
-
-```text
-Real Data Analysis/
-```
-
-The real-data analysis applies the trained ABI-DAGAR network to the Glasgow and
-California datasets and compares the resulting boundary conclusions with two
-reference analyses:
-
-1. CARBayes localized smoothing through `S.CARdissimilarity`.
-2. A model-matched DAGARBayes sampler implemented with Rcpp.
-
-Shared empirical inputs:
-
-```text
-Real Data Analysis/Data/respiratory_data.gpkg
-Real Data Analysis/Data/respiratory_data_california.gpkg
-Real Data Analysis/Data/adjacency_matrix.csv
-Real Data Analysis/Data/adjacency_matrix_california.csv
-```
-
-#### CARBayes reference analysis
-
-Producer script:
-
-```text
-Real Data Analysis/CARBayes_california_glasgow.R
-```
-
-This script runs the CARBayes benchmark for both datasets and writes the
-exports consumed by the comparison notebook.
-
-Required exported inputs:
-
-```text
-Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_posterior_summary.csv
-Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_posterior_samples.csv
-Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_area_table.csv
-Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_edge_table.csv
-Real Data Analysis/setup_and_diagnostics/california/california_posterior_summary.csv
-Real Data Analysis/setup_and_diagnostics/california/california_posterior_samples.csv
-Real Data Analysis/setup_and_diagnostics/california/california_area_table.csv
-Real Data Analysis/setup_and_diagnostics/california/california_edge_table.csv
-```
-
-Comparison notebook:
-
-```text
-Real Data Analysis/CARBayes_vs_ABI_real_data.ipynb
-```
-
-Output folder:
-
-```text
-Real Data Analysis/results_ABI_vs_CARBayes/
-```
-
-Important plots:
-
-```text
-results_ABI_vs_CARBayes/glasgow/glasgow_boundary_agreement.png
-results_ABI_vs_CARBayes/california/california_boundary_agreement.png
-results_ABI_vs_CARBayes/glasgow/glasgow_edge_probability_vs_dissimilarity.png
-results_ABI_vs_CARBayes/california/california_edge_probability_vs_dissimilarity.png
-results_ABI_vs_CARBayes/glasgow/glasgow_fitted_risk_surface.png
-results_ABI_vs_CARBayes/california/california_fitted_risk_surface.png
-results_ABI_vs_CARBayes/glasgow/glasgow_post_pred_check.png
-results_ABI_vs_CARBayes/california/california_post_pred_check.png
-```
-
-#### DAGARBayes reference analysis
-
-Producer files:
-
-```text
-Real Data Analysis/DAGARBayes_california_glasgow.R
-Real Data Analysis/dagar_poisson_boundary_mwg.cpp
-```
-
-The R script compiles the C++ sampler with `Rcpp::sourceCpp`, runs the
-DAGARBayes benchmark for both datasets, and writes the exports consumed by the
-comparison notebook.
-
-Required exported inputs:
-
-```text
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_posterior_summary.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_posterior_samples.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_area_table.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_edge_table.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_posterior_summary.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_posterior_samples.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_area_table.csv
-Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_edge_table.csv
-```
-
-Comparison notebook:
-
-```text
-Real Data Analysis/DAGARBayes_vs_ABI_real_data.ipynb
-```
-
-Output folder:
-
-```text
-Real Data Analysis/results_ABI_vs_DAGARBayes/
-```
-
-Important plots:
-
-```text
-results_ABI_vs_DAGARBayes/glasgow/glasgow_boundary_agreement_dagarbayes.png
-results_ABI_vs_DAGARBayes/california/california_boundary_agreement_dagarbayes.png
-results_ABI_vs_DAGARBayes/glasgow/glasgow_edge_probability_vs_dissimilarity.png
-results_ABI_vs_DAGARBayes/california/california_edge_probability_vs_dissimilarity.png
-results_ABI_vs_DAGARBayes/glasgow/glasgow_fitted_risk_surface.png
-results_ABI_vs_DAGARBayes/california/california_fitted_risk_surface.png
-results_ABI_vs_DAGARBayes/glasgow/glasgow_post_pred_check.png
-results_ABI_vs_DAGARBayes/california/california_post_pred_check.png
-```
-
-## Environment
-
-The ABI workflow was developed in Python with BayesFlow and Keras on the
-TensorFlow backend. The recorded environment used:
-
-```text
-Python 3.10
-BayesFlow 2.0.8
-Keras 3.12.1
-TensorFlow 2.21.0
-NumPy
-SciPy
-Pandas
-Matplotlib
-GeoPandas
-```
-
-The R benchmark scripts use:
-
-```text
-R
-CARBayes
-sf
-Rcpp
-tictoc
-```
-
-The DAGARBayes and ABI-vs-MCMC benchmarks require a working Rcpp/C++ toolchain.
-
-## Reproducibility Notes
-
-Run notebooks from their own analysis folder unless a notebook explicitly
-discovers the project root. Several configuration cells define paths near the
-top of the notebook; if you clone the repository somewhere else, check those
-cells first, especially paths pointing to the saved checkpoint.
-
-The public repository keeps selected outputs used by the manuscript while
-hiding exploratory notebooks, local IDE files, CAR-ABI side experiments, raw
-heavy MCMC artifacts, and other intermediate files. The `.gitignore` file is
-part of the reproducibility setup and documents what is intentionally excluded.
-
-Folders with spaces, such as `Simulation Experiments` and `Real Data Analysis`,
-should be quoted when used from a shell.
-
-## Suggested Reading Order
-
-If you are new to the repository, read/run in this order:
-
-1. `Training/ABI_poisson_regression_DAGAR.ipynb`
-2. `Simulation Experiments/simulation_more_detailed.ipynb`
-3. `Simulation Experiments/ABI_vs_MCMC/compare_abi_vs_mcmc.ipynb`
-4. `Simulation Experiments/Ablation_experiments/Results/compare_ablation_networks.ipynb`
-5. `Real Data Analysis/CARBayes_vs_ABI_real_data.ipynb`
-6. `Real Data Analysis/DAGARBayes_vs_ABI_real_data.ipynb`
-
-If the saved outputs are already present, the comparison notebooks can be read
-or rerun directly without regenerating every upstream MCMC or training artifact.
-
+The repository is organized so that the manuscript and Supplementary Materials can be checked against the exact output files used for all reported figures and tables.
