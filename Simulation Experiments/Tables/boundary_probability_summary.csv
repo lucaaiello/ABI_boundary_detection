@@ -1,0 +1,12 @@
+metric,value
+pooled_auroc,0.9697
+pooled_average_precision,0.8819
+pooled_brier,0.0567
+mean_dataset_auroc,0.9955
+mean_dataset_average_precision,0.9876
+mean_dataset_brier,0.0612
+boundary_count_coverage_95,0.9950
+fdr_mean_sensitivity,0.1689
+fdr_mean_specificity,0.9953
+mpm_mean_sensitivity,0.7192
+mpm_mean_specificity,0.9620

@@ -1,0 +1,6 @@
+metric,value
+correlation,0.7754361881599665
+mae,0.7328482903047069
+rmse,1.1010223167134336
+abi_on_dagarbayes_slope,3.096869024016614
+abi_on_dagarbayes_intercept,-1.285168338700049

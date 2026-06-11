@@ -1,0 +1,281 @@
+loss,val_loss,epoch,experiment,label
+3.96070408821106,3.908414363861084,1,00_baseline,Baseline
+3.009411573410034,2.792258977890014,2,00_baseline,Baseline
+2.5678064823150635,2.7667055130004883,3,00_baseline,Baseline
+2.3661208152771,2.095312118530273,4,00_baseline,Baseline
+2.1036951541900635,2.098666191101074,5,00_baseline,Baseline
+1.9559348821640012,2.0049097537994385,6,00_baseline,Baseline
+1.8150886297225952,1.7582273483276367,7,00_baseline,Baseline
+1.6957379579544067,1.902076244354248,8,00_baseline,Baseline
+1.6096410751342771,1.6293426752090454,9,00_baseline,Baseline
+1.5144141912460327,1.6598881483078003,10,00_baseline,Baseline
+1.5035805702209473,1.5032353401184082,11,00_baseline,Baseline
+1.366645097732544,1.4555028676986694,12,00_baseline,Baseline
+1.299796462059021,1.78611159324646,13,00_baseline,Baseline
+1.2553271055221558,1.231247901916504,14,00_baseline,Baseline
+1.213308811187744,1.1563915014266968,15,00_baseline,Baseline
+1.1483572721481323,1.6651512384414673,16,00_baseline,Baseline
+1.188758134841919,1.1364548206329346,17,00_baseline,Baseline
+1.0702701807022097,1.1181583404541016,18,00_baseline,Baseline
+1.0091179609298706,1.3638358116149902,19,00_baseline,Baseline
+0.9412188529968262,1.1426478624343872,20,00_baseline,Baseline
+0.8791683912277222,0.8781094551086426,21,00_baseline,Baseline
+0.8349921703338623,0.8651160597801208,22,00_baseline,Baseline
+0.7384968400001526,1.018913745880127,23,00_baseline,Baseline
+0.7394681572914124,0.8806982040405273,24,00_baseline,Baseline
+0.7412058115005493,1.01968514919281,25,00_baseline,Baseline
+0.6267438530921936,0.8407079577445984,26,00_baseline,Baseline
+0.5928964018821716,0.7894255518913269,27,00_baseline,Baseline
+0.5428579449653625,0.753890872001648,28,00_baseline,Baseline
+0.5082561373710632,0.788893461227417,29,00_baseline,Baseline
+0.51218181848526,0.972504734992981,30,00_baseline,Baseline
+0.4685980975627899,0.6870115995407104,31,00_baseline,Baseline
+0.4129736721515655,0.851117730140686,32,00_baseline,Baseline
+0.3998429179191589,0.700221061706543,33,00_baseline,Baseline
+0.359838992357254,0.6907002925872803,34,00_baseline,Baseline
+0.3096251785755157,0.6446896195411682,35,00_baseline,Baseline
+0.2989321649074554,0.6872406601905823,36,00_baseline,Baseline
+0.2701712846755981,0.6845277547836304,37,00_baseline,Baseline
+0.2616212368011474,0.6835923790931702,38,00_baseline,Baseline
+0.2609406113624573,0.6662039756774902,39,00_baseline,Baseline
+0.2577239274978637,0.6698935031890869,40,00_baseline,Baseline
+3.884500026702881,3.1550068855285645,1,01_ablate_core_observation_features,No core observation features
+2.987844467163086,2.863378524780273,2,01_ablate_core_observation_features,No core observation features
+2.710688591003418,2.508419752120972,3,01_ablate_core_observation_features,No core observation features
+2.323915481567383,2.280879020690918,4,01_ablate_core_observation_features,No core observation features
+2.187046766281128,2.103485584259033,5,01_ablate_core_observation_features,No core observation features
+2.012242794036865,2.238453865051269,6,01_ablate_core_observation_features,No core observation features
+2.0862221717834477,2.1934800148010254,7,01_ablate_core_observation_features,No core observation features
+1.8511728048324585,1.7839913368225098,8,01_ablate_core_observation_features,No core observation features
+1.7951372861862185,1.9010274410247805,9,01_ablate_core_observation_features,No core observation features
+1.71068012714386,1.7727689743041992,10,01_ablate_core_observation_features,No core observation features
+1.673794150352478,1.7357885837554932,11,01_ablate_core_observation_features,No core observation features
+1.5522388219833374,1.697455883026123,12,01_ablate_core_observation_features,No core observation features
+1.4590883255004885,1.7650048732757568,13,01_ablate_core_observation_features,No core observation features
+1.410944938659668,1.667814016342163,14,01_ablate_core_observation_features,No core observation features
+1.4104653596878052,1.3137636184692385,15,01_ablate_core_observation_features,No core observation features
+1.3406699895858765,1.5797605514526367,16,01_ablate_core_observation_features,No core observation features
+1.2983781099319458,1.4145535230636597,17,01_ablate_core_observation_features,No core observation features
+1.195221185684204,1.4661686420440674,18,01_ablate_core_observation_features,No core observation features
+1.137156367301941,1.3665202856063845,19,01_ablate_core_observation_features,No core observation features
+1.153428077697754,1.3152718544006348,20,01_ablate_core_observation_features,No core observation features
+1.1228653192520142,1.3272030353546145,21,01_ablate_core_observation_features,No core observation features
+1.1003599166870115,1.222258448600769,22,01_ablate_core_observation_features,No core observation features
+0.9908412098884584,1.2106149196624756,23,01_ablate_core_observation_features,No core observation features
+1.001698017120361,1.1911537647247314,24,01_ablate_core_observation_features,No core observation features
+0.9235856533050536,1.425920844078064,25,01_ablate_core_observation_features,No core observation features
+0.90544855594635,1.2688149213790894,26,01_ablate_core_observation_features,No core observation features
+0.8716514706611633,1.0842280387878418,27,01_ablate_core_observation_features,No core observation features
+0.8143832683563232,1.245108962059021,28,01_ablate_core_observation_features,No core observation features
+0.7716576457023621,1.141884446144104,29,01_ablate_core_observation_features,No core observation features
+0.7467929720878601,1.2686717510223389,30,01_ablate_core_observation_features,No core observation features
+0.7484210729598999,1.0384588241577148,31,01_ablate_core_observation_features,No core observation features
+0.70220947265625,1.0562342405319214,32,01_ablate_core_observation_features,No core observation features
+0.6711243391036987,1.109117031097412,33,01_ablate_core_observation_features,No core observation features
+0.6457635760307312,1.0168250799179075,34,01_ablate_core_observation_features,No core observation features
+0.6275843977928162,1.0355602502822876,35,01_ablate_core_observation_features,No core observation features
+0.6052426695823669,1.0178439617156982,36,01_ablate_core_observation_features,No core observation features
+0.588753879070282,1.036797285079956,37,01_ablate_core_observation_features,No core observation features
+0.5865716338157654,1.033141016960144,38,01_ablate_core_observation_features,No core observation features
+0.5743870735168457,1.0235004425048828,39,01_ablate_core_observation_features,No core observation features
+0.5619396567344666,1.0241721868515017,40,01_ablate_core_observation_features,No core observation features
+3.876086473464966,2.955864191055298,1,02_ablate_graph_topology_features,No graph topology features
+2.991162061691284,3.143073320388794,2,02_ablate_graph_topology_features,No graph topology features
+2.6414594650268555,2.363576412200928,3,02_ablate_graph_topology_features,No graph topology features
+2.3021063804626465,2.232367992401123,4,02_ablate_graph_topology_features,No graph topology features
+2.099453926086426,2.272778272628784,5,02_ablate_graph_topology_features,No graph topology features
+1.946964144706726,1.9209738969802856,6,02_ablate_graph_topology_features,No graph topology features
+1.909631371498108,1.5947054624557495,7,02_ablate_graph_topology_features,No graph topology features
+1.722326159477234,1.8203396797180176,8,02_ablate_graph_topology_features,No graph topology features
+1.6814494132995603,1.5980770587921145,9,02_ablate_graph_topology_features,No graph topology features
+1.5722404718399048,1.585511326789856,10,02_ablate_graph_topology_features,No graph topology features
+1.4387867450714111,1.761810541152954,11,02_ablate_graph_topology_features,No graph topology features
+1.3628015518188477,1.4004666805267334,12,02_ablate_graph_topology_features,No graph topology features
+1.4429529905319214,1.3113954067230225,13,02_ablate_graph_topology_features,No graph topology features
+1.2709457874298096,1.3363085985183716,14,02_ablate_graph_topology_features,No graph topology features
+1.1898598670959473,1.2344398498535156,15,02_ablate_graph_topology_features,No graph topology features
+1.1293178796768188,1.2325553894042969,16,02_ablate_graph_topology_features,No graph topology features
+1.1356984376907349,1.2165470123291016,17,02_ablate_graph_topology_features,No graph topology features
+1.0580323934555054,1.0584206581115725,18,02_ablate_graph_topology_features,No graph topology features
+0.9958175420761108,1.1984590291976929,19,02_ablate_graph_topology_features,No graph topology features
+0.962084412574768,0.8737279772758484,20,02_ablate_graph_topology_features,No graph topology features
+0.8758863806724548,1.1237635612487793,21,02_ablate_graph_topology_features,No graph topology features
+0.8267571330070496,0.8597266674041748,22,02_ablate_graph_topology_features,No graph topology features
+0.7738839983940125,0.9706355929374696,23,02_ablate_graph_topology_features,No graph topology features
+0.744809627532959,0.8362954258918762,24,02_ablate_graph_topology_features,No graph topology features
+0.7195042371749878,1.040591597557068,25,02_ablate_graph_topology_features,No graph topology features
+0.6681826710700989,0.7248789072036743,26,02_ablate_graph_topology_features,No graph topology features
+0.6037847399711609,0.7519095540046692,27,02_ablate_graph_topology_features,No graph topology features
+0.5397650003433228,0.73711758852005,28,02_ablate_graph_topology_features,No graph topology features
+0.5358796119689941,0.9510802030563354,29,02_ablate_graph_topology_features,No graph topology features
+0.4790295660495758,0.8019885420799255,30,02_ablate_graph_topology_features,No graph topology features
+0.4662803709506988,0.7138000726699829,31,02_ablate_graph_topology_features,No graph topology features
+0.4139196872711181,0.672317385673523,32,02_ablate_graph_topology_features,No graph topology features
+0.3616421520709991,0.6452710032463074,33,02_ablate_graph_topology_features,No graph topology features
+0.3594357967376709,0.6613774299621582,34,02_ablate_graph_topology_features,No graph topology features
+0.3216600716114044,0.6192114949226379,35,02_ablate_graph_topology_features,No graph topology features
+0.3086980879306793,0.659813642501831,36,02_ablate_graph_topology_features,No graph topology features
+0.2897014915943146,0.6347200870513916,37,02_ablate_graph_topology_features,No graph topology features
+0.2832009196281433,0.6281710863113403,38,02_ablate_graph_topology_features,No graph topology features
+0.2687758207321167,0.6225302219390869,39,02_ablate_graph_topology_features,No graph topology features
+0.2564286589622497,0.6290441155433655,40,02_ablate_graph_topology_features,No graph topology features
+3.99062705039978,3.1180715560913086,1,03_ablate_dissimilarity_features,No dissimilarity features
+2.9846222400665283,2.7552623748779297,2,03_ablate_dissimilarity_features,No dissimilarity features
+2.698239803314209,2.165225982666016,3,03_ablate_dissimilarity_features,No dissimilarity features
+2.373314142227173,2.138947010040283,4,03_ablate_dissimilarity_features,No dissimilarity features
+2.169951200485229,2.016080856323242,5,03_ablate_dissimilarity_features,No dissimilarity features
+2.0414888858795166,1.906911015510559,6,03_ablate_dissimilarity_features,No dissimilarity features
+1.7919877767562866,1.7250328063964844,7,03_ablate_dissimilarity_features,No dissimilarity features
+1.7529726028442385,1.6858595609664917,8,03_ablate_dissimilarity_features,No dissimilarity features
+1.5137434005737305,1.483757257461548,9,03_ablate_dissimilarity_features,No dissimilarity features
+1.5198076963424685,1.6687613725662231,10,03_ablate_dissimilarity_features,No dissimilarity features
+1.418845772743225,1.711893081665039,11,03_ablate_dissimilarity_features,No dissimilarity features
+1.3546165227890017,1.3554810285568235,12,03_ablate_dissimilarity_features,No dissimilarity features
+1.3035707473754885,1.2614777088165283,13,03_ablate_dissimilarity_features,No dissimilarity features
+1.1978108882904053,1.3399308919906616,14,03_ablate_dissimilarity_features,No dissimilarity features
+1.2186994552612305,1.1181871891021729,15,03_ablate_dissimilarity_features,No dissimilarity features
+1.162589192390442,1.2476818561553955,16,03_ablate_dissimilarity_features,No dissimilarity features
+1.1115778684616089,1.1937791109085083,17,03_ablate_dissimilarity_features,No dissimilarity features
+1.0090456008911133,1.0012801885604858,18,03_ablate_dissimilarity_features,No dissimilarity features
+1.0189892053604126,1.0901347398757937,19,03_ablate_dissimilarity_features,No dissimilarity features
+0.8849800825119019,0.9676426649093628,20,03_ablate_dissimilarity_features,No dissimilarity features
+0.8821929693222046,0.9157635569572448,21,03_ablate_dissimilarity_features,No dissimilarity features
+0.8011799454689026,0.9794526100158693,22,03_ablate_dissimilarity_features,No dissimilarity features
+0.7612795233726501,0.8878957629203796,23,03_ablate_dissimilarity_features,No dissimilarity features
+0.7398338317871094,0.8178571462631226,24,03_ablate_dissimilarity_features,No dissimilarity features
+0.6978265643119812,0.9497196674346924,25,03_ablate_dissimilarity_features,No dissimilarity features
+0.630230188369751,0.7626147866249084,26,03_ablate_dissimilarity_features,No dissimilarity features
+0.5877037644386292,0.7691565155982971,27,03_ablate_dissimilarity_features,No dissimilarity features
+0.5499776601791382,0.8757888674736023,28,03_ablate_dissimilarity_features,No dissimilarity features
+0.5085879564285278,0.7132220268249512,29,03_ablate_dissimilarity_features,No dissimilarity features
+0.4669508635997772,0.9514347314834596,30,03_ablate_dissimilarity_features,No dissimilarity features
+0.4526455402374267,0.6790528297424316,31,03_ablate_dissimilarity_features,No dissimilarity features
+0.4221650958061218,0.7483348846435547,32,03_ablate_dissimilarity_features,No dissimilarity features
+0.3808185458183288,0.6358798742294312,33,03_ablate_dissimilarity_features,No dissimilarity features
+0.3756307661533355,0.6429977416992188,34,03_ablate_dissimilarity_features,No dissimilarity features
+0.3334943354129791,0.6094862818717957,35,03_ablate_dissimilarity_features,No dissimilarity features
+0.3214374780654907,0.6311821937561035,36,03_ablate_dissimilarity_features,No dissimilarity features
+0.2935771942138672,0.6247661709785461,37,03_ablate_dissimilarity_features,No dissimilarity features
+0.2840770781040191,0.6274268627166748,38,03_ablate_dissimilarity_features,No dissimilarity features
+0.2712703049182892,0.604779064655304,39,03_ablate_dissimilarity_features,No dissimilarity features
+0.2789681255817413,0.6097318530082703,40,03_ablate_dissimilarity_features,No dissimilarity features
+3.901276826858521,3.3292107582092285,1,04_ablate_local_spatial_features,No local spatial features
+3.0233676433563232,2.886405229568481,2,04_ablate_local_spatial_features,No local spatial features
+2.7714874744415283,2.4058995246887207,3,04_ablate_local_spatial_features,No local spatial features
+2.34765100479126,2.3706789016723637,4,04_ablate_local_spatial_features,No local spatial features
+2.242821455001831,2.265432596206665,5,04_ablate_local_spatial_features,No local spatial features
+1.9384063482284544,2.0287420749664307,6,04_ablate_local_spatial_features,No local spatial features
+1.8308706283569336,1.9857410192489624,7,04_ablate_local_spatial_features,No local spatial features
+1.7306396961212158,1.7648420333862305,8,04_ablate_local_spatial_features,No local spatial features
+1.5969352722167969,1.5981628894805908,9,04_ablate_local_spatial_features,No local spatial features
+1.6434141397476196,1.813609600067139,10,04_ablate_local_spatial_features,No local spatial features
+1.52735698223114,1.8316621780395508,11,04_ablate_local_spatial_features,No local spatial features
+1.3683838844299316,1.3229314088821411,12,04_ablate_local_spatial_features,No local spatial features
+1.3053637742996216,1.3605564832687378,13,04_ablate_local_spatial_features,No local spatial features
+1.2513622045516968,1.3574477434158323,14,04_ablate_local_spatial_features,No local spatial features
+1.2597044706344604,1.404224872589111,15,04_ablate_local_spatial_features,No local spatial features
+1.1187169551849363,1.1652934551239014,16,04_ablate_local_spatial_features,No local spatial features
+1.1133785247802734,1.2974464893341064,17,04_ablate_local_spatial_features,No local spatial features
+1.0830090045928955,1.0202536582946775,18,04_ablate_local_spatial_features,No local spatial features
+0.9396375417709352,1.2704609632492063,19,04_ablate_local_spatial_features,No local spatial features
+0.9123836755752563,0.9505897760391236,20,04_ablate_local_spatial_features,No local spatial features
+0.8746681809425354,1.0911715030670166,21,04_ablate_local_spatial_features,No local spatial features
+0.8106376528739929,0.96668940782547,22,04_ablate_local_spatial_features,No local spatial features
+0.7394391894340515,0.9842146039009094,23,04_ablate_local_spatial_features,No local spatial features
+0.717601478099823,0.909706711769104,24,04_ablate_local_spatial_features,No local spatial features
+0.7137285470962524,1.0624381303787231,25,04_ablate_local_spatial_features,No local spatial features
+0.6340595483779907,0.934589982032776,26,04_ablate_local_spatial_features,No local spatial features
+0.559668779373169,0.8477377891540527,27,04_ablate_local_spatial_features,No local spatial features
+0.5145975351333618,0.8037179112434387,28,04_ablate_local_spatial_features,No local spatial features
+0.4799972772598266,0.7536347508430481,29,04_ablate_local_spatial_features,No local spatial features
+0.4860894083976745,0.7750102877616882,30,04_ablate_local_spatial_features,No local spatial features
+0.4296507239341736,0.7161422967910767,31,04_ablate_local_spatial_features,No local spatial features
+0.3919107913970947,0.6676741242408752,32,04_ablate_local_spatial_features,No local spatial features
+0.3661056756973266,0.6679458618164062,33,04_ablate_local_spatial_features,No local spatial features
+0.3453378677368164,0.656129777431488,34,04_ablate_local_spatial_features,No local spatial features
+0.3020830154418945,0.6347537636756897,35,04_ablate_local_spatial_features,No local spatial features
+0.290413498878479,0.649444043636322,36,04_ablate_local_spatial_features,No local spatial features
+0.2754864990711212,0.6248441934585571,37,04_ablate_local_spatial_features,No local spatial features
+0.2485158145427703,0.6363658905029297,38,04_ablate_local_spatial_features,No local spatial features
+0.2418606132268905,0.631110429763794,39,04_ablate_local_spatial_features,No local spatial features
+0.2402494549751281,0.6279850602149963,40,04_ablate_local_spatial_features,No local spatial features
+3.9859673976898193,3.096521377563477,1,05_ablate_global_graph_features,No global graph features
+3.231478691101074,2.779280185699463,2,05_ablate_global_graph_features,No global graph features
+2.8212058544158936,2.441826343536377,3,05_ablate_global_graph_features,No global graph features
+2.412062883377075,2.3851239681243896,4,05_ablate_global_graph_features,No global graph features
+2.08270525932312,1.888410568237305,5,05_ablate_global_graph_features,No global graph features
+2.0114665031433105,2.147254705429077,6,05_ablate_global_graph_features,No global graph features
+1.96210253238678,2.0603058338165283,7,05_ablate_global_graph_features,No global graph features
+1.68989360332489,1.4749118089675903,8,05_ablate_global_graph_features,No global graph features
+1.6159521341323853,1.4858893156051636,9,05_ablate_global_graph_features,No global graph features
+1.484707951545715,1.3678303956985474,10,05_ablate_global_graph_features,No global graph features
+1.4334503412246704,1.574615716934204,11,05_ablate_global_graph_features,No global graph features
+1.3023737668991089,1.213019847869873,12,05_ablate_global_graph_features,No global graph features
+1.3324640989303589,1.5305380821228027,13,05_ablate_global_graph_features,No global graph features
+1.168664574623108,1.4739190340042114,14,05_ablate_global_graph_features,No global graph features
+1.2189650535583496,1.043443202972412,15,05_ablate_global_graph_features,No global graph features
+1.073310613632202,1.2378742694854736,16,05_ablate_global_graph_features,No global graph features
+1.082837700843811,0.9836380481719972,17,05_ablate_global_graph_features,No global graph features
+0.9729284048080444,0.9159021973609924,18,05_ablate_global_graph_features,No global graph features
+0.8968126177787781,1.0889946222305298,19,05_ablate_global_graph_features,No global graph features
+0.8332956433296204,1.024123191833496,20,05_ablate_global_graph_features,No global graph features
+0.8026366233825684,0.9586057662963868,21,05_ablate_global_graph_features,No global graph features
+0.7892941236495972,0.7708148956298828,22,05_ablate_global_graph_features,No global graph features
+0.6966481804847717,0.953155279159546,23,05_ablate_global_graph_features,No global graph features
+0.6780823469161987,0.8145556449890137,24,05_ablate_global_graph_features,No global graph features
+0.6759336590766907,0.873317301273346,25,05_ablate_global_graph_features,No global graph features
+0.5858942866325378,0.7339197993278503,26,05_ablate_global_graph_features,No global graph features
+0.5227811932563782,0.7380684018135071,27,05_ablate_global_graph_features,No global graph features
+0.5153306722640991,0.7190917730331421,28,05_ablate_global_graph_features,No global graph features
+0.4720252156257629,0.6362447738647461,29,05_ablate_global_graph_features,No global graph features
+0.4304082095623016,0.7471214532852173,30,05_ablate_global_graph_features,No global graph features
+0.3839528560638428,0.6262193322181702,31,05_ablate_global_graph_features,No global graph features
+0.3814701437950134,0.576694130897522,32,05_ablate_global_graph_features,No global graph features
+0.3597691655158996,0.6409896612167358,33,05_ablate_global_graph_features,No global graph features
+0.3164229691028595,0.6346740126609802,34,05_ablate_global_graph_features,No global graph features
+0.300153523683548,0.6121413707733154,35,05_ablate_global_graph_features,No global graph features
+0.2810011208057403,0.5565177798271179,36,05_ablate_global_graph_features,No global graph features
+0.2447936087846756,0.5833871364593506,37,05_ablate_global_graph_features,No global graph features
+0.2398926317691803,0.5992758274078369,38,05_ablate_global_graph_features,No global graph features
+0.2304468601942062,0.5616679787635803,39,05_ablate_global_graph_features,No global graph features
+0.2275135070085525,0.5699926614761353,40,05_ablate_global_graph_features,No global graph features
+4.381512641906738,4.0180206298828125,1,06_core_observation_only,Only core observation features
+3.521891593933105,3.381088733673096,2,06_core_observation_only,Only core observation features
+3.0847866535186768,2.654258728027344,3,06_core_observation_only,Only core observation features
+2.845909357070923,2.6921887397766118,4,06_core_observation_only,Only core observation features
+2.6119396686553955,2.617176055908203,5,06_core_observation_only,Only core observation features
+2.3939578533172607,2.11673355102539,6,06_core_observation_only,Only core observation features
+2.416545152664185,1.9090018272399905,7,06_core_observation_only,Only core observation features
+2.2468972206115723,1.972890853881836,8,06_core_observation_only,Only core observation features
+2.1010587215423584,2.2901222705841064,9,06_core_observation_only,Only core observation features
+1.9951900243759155,1.7367347478866575,10,06_core_observation_only,Only core observation features
+2.0305776596069336,1.8265684843063357,11,06_core_observation_only,Only core observation features
+1.8506760597229004,2.050863742828369,12,06_core_observation_only,Only core observation features
+1.8902275562286377,1.6341828107833862,13,06_core_observation_only,Only core observation features
+1.8599156141281128,1.996009469032288,14,06_core_observation_only,Only core observation features
+1.841983675956726,1.8188356161117556,15,06_core_observation_only,Only core observation features
+1.6964383125305176,1.7818888425827026,16,06_core_observation_only,Only core observation features
+1.688063144683838,1.5908931493759155,17,06_core_observation_only,Only core observation features
+1.6286991834640503,1.8184553384780884,18,06_core_observation_only,Only core observation features
+1.6052343845367432,1.6867201328277588,19,06_core_observation_only,Only core observation features
+1.5396490097045898,1.8078629970550537,20,06_core_observation_only,Only core observation features
+1.5030430555343628,1.4532041549682615,21,06_core_observation_only,Only core observation features
+1.5179818868637085,1.5336105823516846,22,06_core_observation_only,Only core observation features
+1.4268115758895874,1.3409605026245115,23,06_core_observation_only,Only core observation features
+1.3924182653427124,1.3485333919525146,24,06_core_observation_only,Only core observation features
+1.3004050254821775,1.372638702392578,25,06_core_observation_only,Only core observation features
+1.307276725769043,1.3166134357452393,26,06_core_observation_only,Only core observation features
+1.2896145582199097,1.2852041721343994,27,06_core_observation_only,Only core observation features
+1.2616814374923706,1.2196696996688845,28,06_core_observation_only,Only core observation features
+1.2303707599639893,1.121652364730835,29,06_core_observation_only,Only core observation features
+1.176972270011902,1.4067010879516602,30,06_core_observation_only,Only core observation features
+1.1775217056274414,1.2383440732955933,31,06_core_observation_only,Only core observation features
+1.1384466886520386,1.196499586105347,32,06_core_observation_only,Only core observation features
+1.1061866283416748,1.0974938869476318,33,06_core_observation_only,Only core observation features
+1.0775352716445925,1.1579443216323853,34,06_core_observation_only,Only core observation features
+1.057736039161682,1.0972366333007812,35,06_core_observation_only,Only core observation features
+1.0466933250427246,1.071628451347351,36,06_core_observation_only,Only core observation features
+1.0422229766845703,1.050869107246399,37,06_core_observation_only,Only core observation features
+1.021657109260559,1.0599768161773682,38,06_core_observation_only,Only core observation features
+1.003558874130249,1.0396682024002075,39,06_core_observation_only,Only core observation features
+1.0009121894836426,1.0395302772521973,40,06_core_observation_only,Only core observation features

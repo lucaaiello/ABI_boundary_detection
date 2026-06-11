@@ -1,0 +1,11 @@
+metric,value
+training_wall_seconds,20664.0000
+training_wall_hours,5.7400
+validation_inference_seconds_total,163.1504
+validation_inference_seconds_per_dataset,0.8158
+validation_memory_gb,0.8160
+ppc_runtime_seconds,24.5089
+reference_per_dataset_seconds,3.0000
+break_even_datasets,9460.4635
+n_validation_datasets,200.0000
+posterior_draws_per_dataset,10000.0000

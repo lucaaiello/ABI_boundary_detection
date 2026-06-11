@@ -1,0 +1,11 @@
+metric,value,dataset
+correlation,0.7693049710650753,glasgow
+mae,0.732873604955172,glasgow
+rmse,1.0988897533236526,glasgow
+abi_on_car_slope,3.053896865859245,glasgow
+abi_on_car_intercept,-1.2486015760814846,glasgow
+correlation,0.8503568985502473,california
+mae,0.15035989632855354,california
+rmse,0.23184482541051504,california
+abi_on_car_slope,1.7521101128470724,california
+abi_on_car_intercept,-0.8200086710141505,california

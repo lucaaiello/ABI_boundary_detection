@@ -1,0 +1,94 @@
+# Local IDE/session files
+.Rhistory
+.Rproj.user/
+ABI_poisson_regression.code-workspace
+ABI_poisson_regression.Rproj
+
+# Python/Jupyter generated files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Training artifacts not intended for the public repository
+Training/ABI_poisson_regression_CAR.ipynb
+Training/ABI_poisson_regression_DAGAR2.ipynb
+Training/poisson regression w spatial adj rndm graph transformer.ipynb
+Training/poisson regression w spatial adj rndm graph transformer more general.ipynb
+Training/training_history_car.csv
+Training/Images/history_plot_car.png
+Training/Images/history_plot2.png
+Training/Checkpoints/poisson_car.dagar
+Training/Checkpoints/poisson_car.keras
+
+# Files above GitHub's regular 100 MB per-file limit.
+# Keep derived ablation tables/figures in Git; store these raw shared batches
+# via Git LFS or an external archive if full reruns from raw cached batches are needed.
+Simulation Experiments/Ablation_experiments/Results/shared_data/train_batches_full_summaries_b100_bs64_n40_120_seed2026051201.pkl
+Simulation Experiments/Ablation_experiments/Results/shared_data/validation_batches_full_summaries_allN_n4050_maxbs50_n40_120_seed2026051202.pkl
+
+# CAR-specific simulation validation
+Simulation Experiments/simulation_more_detailed_car.ipynb
+Simulation Experiments/CAR_validation/
+
+# ABI-vs-MCMC notes not intended for public repository
+Simulation Experiments/ABI_vs_MCMC/README.md
+
+# ABI-vs-MCMC benchmark bank: hide heavy/raw outputs by default.
+# The comparison notebook only needs the selected combined summaries and
+# per-dataset edge-probability files listed below.
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/benchmark_manifest.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/benchmark_config.json
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/r_inputs/
+
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/abi_results_all100/abi_config.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/abi_results_all100/per_dataset/**/*
+!Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/abi_results_all100/per_dataset/**/
+!Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/abi_results_all100/per_dataset/**/*_edge_probabilities.csv
+
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/mcmc_config.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/combined_acceptance.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/combined_chain_diagnostics.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/combined_runtime.csv
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/per_dataset/**/*
+!Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/per_dataset/**/
+!Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100/per_dataset/**/*_edge_probabilities.csv
+
+# Standalone real-data MCMC runner not used by the manuscript comparison notebook
+Simulation Experiments/ABI_vs_MCMC/run_mcmc_real_data.R
+
+# Real-data analysis: keep only the two manuscript comparison notebooks,
+# the scripts/sampler that produce their benchmark inputs, their shared
+# empirical inputs, their required benchmark exports, and the folders they write.
+Real Data Analysis/*
+!Real Data Analysis/CARBayes_california_glasgow.R
+!Real Data Analysis/DAGARBayes_california_glasgow.R
+!Real Data Analysis/dagar_poisson_boundary_mwg.cpp
+!Real Data Analysis/CARBayes_vs_ABI_real_data.ipynb
+!Real Data Analysis/DAGARBayes_vs_ABI_real_data.ipynb
+!Real Data Analysis/Data/
+!Real Data Analysis/setup_and_diagnostics/
+!Real Data Analysis/results_ABI_vs_CARBayes/
+!Real Data Analysis/results_ABI_vs_DAGARBayes/
+
+Real Data Analysis/setup_and_diagnostics/**/*
+!Real Data Analysis/setup_and_diagnostics/california/
+!Real Data Analysis/setup_and_diagnostics/california/california_posterior_summary.csv
+!Real Data Analysis/setup_and_diagnostics/california/california_posterior_samples.csv
+!Real Data Analysis/setup_and_diagnostics/california/california_area_table.csv
+!Real Data Analysis/setup_and_diagnostics/california/california_edge_table.csv
+!Real Data Analysis/setup_and_diagnostics/glasgow/
+!Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_posterior_summary.csv
+!Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_posterior_samples.csv
+!Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_area_table.csv
+!Real Data Analysis/setup_and_diagnostics/glasgow/glasgow_edge_table.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_posterior_summary.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_posterior_samples.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_area_table.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/california/california_edge_table.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_posterior_summary.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_posterior_samples.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_area_table.csv
+!Real Data Analysis/setup_and_diagnostics/DAGARBayes/glasgow/glasgow_edge_table.csv

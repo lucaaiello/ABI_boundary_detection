@@ -1,0 +1,8 @@
+experiment,label,total_runtime_sec,mean_seconds_per_dataset,mean_seconds_per_1000_draws_per_dataset,num_batches
+00_baseline,Baseline,135.48980059986934,0.03345427175305416,0.03345427175305416,81
+01_ablate_core_observation_features,No core observation features,141.33246809907723,0.03489690570347586,0.03489690570347586,81
+02_ablate_graph_topology_features,No graph topology features,148.65275929949712,0.036704385012221515,0.036704385012221515,81
+03_ablate_dissimilarity_features,No dissimilarity features,139.7919191007968,0.034516523234764646,0.034516523234764646,81
+04_ablate_local_spatial_features,No local spatial features,137.48080749996006,0.033945878395051865,0.033945878395051865,81
+05_ablate_global_graph_features,No global graph features,135.99108699988574,0.03357804617281129,0.03357804617281129,81
+06_core_observation_only,Only core observation features,135.7728445000248,0.03352415913580859,0.03352415913580859,81

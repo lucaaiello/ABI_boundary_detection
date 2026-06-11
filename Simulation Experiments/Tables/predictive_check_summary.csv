@@ -1,0 +1,10 @@
+metric,value
+ppc_dataset_count,40.0000
+ppc_draws_per_dataset,100.0000
+node_count_coverage95_mean,0.9388
+moran_coverage95_mean,0.9750
+edge_absdiff_low_ppp_mean,0.5322
+edge_absdiff_mid_ppp_mean,0.4845
+edge_absdiff_high_ppp_mean,0.5397
+boundary_count_coverage95_mean,0.9950
+ppc_runtime_seconds,24.5089

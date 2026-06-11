@@ -1,0 +1,3 @@
+basis,mcmc_elapsed_sec,abi_elapsed_sec,per_dataset_time_saved_sec,abi_training_sec,break_even_datasets,break_even_datasets_ceiling
+mean,2.8395000000000348,0.7791419420018793,2.0603580579981555,,,
+median,2.82999999999993,0.7625919000129215,2.0674080999870084,,,

@@ -1,0 +1,9 @@
+metric,value
+boundary_prob_correlation,0.8626140334929002
+boundary_prob_mae,0.11929566666666667
+abi_prob_vs_dissimilarity_corr,0.8933960536360935
+dagarbayes_prob_vs_dissimilarity_corr,0.8304798874167771
+median_boundary_count_abi,134.0
+median_boundary_count_dagarbayes,99.0
+median_boundary_overlap,99.0
+median_boundary_jaccard,0.7388059701492538

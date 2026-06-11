@@ -1,0 +1,11 @@
+metric,value,dataset
+correlation,0.7754361881599665,glasgow
+mae,0.7328482903047069,glasgow
+rmse,1.1010223167134336,glasgow
+abi_on_dagarbayes_slope,3.096869024016614,glasgow
+abi_on_dagarbayes_intercept,-1.285168338700049,glasgow
+correlation,0.8592734412970595,california
+mae,0.15253488081475458,california
+rmse,0.2332321015461186,california
+abi_on_dagarbayes_slope,1.8134861569715046,california
+abi_on_dagarbayes_intercept,-0.8796574527685195,california

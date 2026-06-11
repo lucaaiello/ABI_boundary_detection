@@ -1,0 +1,8 @@
+metric,value
+mean_selected_boundaries,80.74
+std_selected_boundaries,80.34421198817
+mean_true_boundaries,91.24
+mean_sensitivity,0.7192061741608547
+std_sensitivity,0.3224756944927322
+mean_specificity,0.9620079766017536
+std_specificity,0.05913934784288192

@@ -1,0 +1,140 @@
+from_index0,to_index0,from_id,to_id,edge_dissimilarity,boundary_prob_abi,boundary_median_abi,boundary_prob,boundary_median_car
+0,6,alameda,contra costa,0.2580998,0.0,0,0.0,0
+0,38,alameda,san joaquin,0.5396631,0.0,0,0.0,0
+0,42,alameda,santa clara,0.68044466,0.0,0,0.0,0
+0,49,alameda,stanislaus,1.1731806,0.39543,0,0.1292,0
+1,2,alpine,amador,0.0,0.0,0,0.0,0
+1,4,alpine,calaveras,0.0,0.0,0,0.0,0
+1,8,alpine,el dorado,0.774299,0.10157,0,0.0,0
+1,25,alpine,mono,0.0,0.0,0,0.0,0
+1,54,alpine,tuolumne,1.5485985,0.52034,1,0.2571,0
+2,4,amador,calaveras,0.0,0.0,0,0.0,0
+2,8,amador,el dorado,0.774299,0.10157,0,0.0,0
+2,33,amador,sacramento,0.774299,0.10157,0,0.0,0
+2,38,amador,san joaquin,0.28156328,0.0,0,0.0,0
+3,5,butte,colusa,0.7039083,0.0,0,0.0,0
+3,10,butte,glenn,0.7039083,0.0,0,0.0,0
+3,31,butte,plumas,0.14078154,0.0,0,0.0,0
+3,50,butte,sutter,0.23463613,0.0,0,0.0,0
+3,51,butte,tehama,0.7039083,0.0,0,0.0,0
+3,57,butte,yuba,1.5016711,0.50721,1,0.1724,0
+4,38,calaveras,san joaquin,0.28156328,0.0,0,0.0,0
+4,49,calaveras,stanislaus,0.9150808,0.24656,0,0.0,0
+4,54,calaveras,tuolumne,1.5485985,0.52034,1,0.2571,0
+5,10,colusa,glenn,0.0,0.0,0,0.0,0
+5,16,colusa,lake,1.5485984,0.52034,1,0.2571,0
+5,50,colusa,sutter,0.9385444,0.26403,0,0.0007,0
+5,56,colusa,yolo,1.7363071,0.56501,1,0.9317,1
+6,33,contra costa,sacramento,0.774299,0.10157,0,0.0,0
+6,38,contra costa,san joaquin,0.28156328,0.0,0,0.0,0
+6,47,contra costa,solano,0.2580998,0.0,0,0.0,0
+7,11,del norte,humboldt,2.4167523,0.66847,1,0.9853,1
+7,46,del norte,siskiyou,0.0,0.0,0,0.0,0
+8,30,el dorado,placer,1.6189891,0.53965,1,0.7256,1
+8,33,el dorado,sacramento,0.0,0.0,0,0.0,0
+9,13,fresno,inyo,1.5251348,0.51375,1,0.2104,0
+9,15,fresno,kings,1.220108,0.41555,0,0.1459,0
+9,19,fresno,madera,1.9944069,0.61165,1,0.9571,1
+9,23,fresno,merced,0.6335177,0.0,0,0.0,0
+9,25,fresno,mono,1.5251348,0.51375,1,0.2104,0
+9,26,fresno,monterey,1.9944069,0.61165,1,0.9571,1
+9,34,fresno,san benito,2.0178707,0.61546,1,0.9578,1
+9,53,fresno,tulare,0.51619965,0.0,0,0.0,0
+10,16,glenn,lake,1.5485984,0.52034,1,0.2571,0
+10,22,glenn,mendocino,0.9150807,0.24656,0,0.0,0
+10,51,glenn,tehama,0.0,0.0,0,0.0,0
+11,22,humboldt,mendocino,0.14078176,0.0,0,0.0,0
+11,46,humboldt,siskiyou,2.4167523,0.66847,1,0.9853,1
+11,52,humboldt,trinity,2.4167523,0.66847,1,0.9853,1
+12,32,imperial,riverside,0.37541795,0.0,0,0.0,0
+12,36,imperial,san diego,0.18770897,0.0,0,0.0,0
+13,14,inyo,kern,0.49273568,0.0,0,0.0,0
+13,25,inyo,mono,0.0,0.0,0,0.0,0
+13,35,inyo,san bernardino,0.28156328,0.0,0,0.0,0
+13,53,inyo,tulare,1.0089351,0.31333,0,0.0534,0
+14,15,kern,kings,0.18770893,0.0,0,0.0,0
+14,18,kern,los angeles,0.7273718,0.03909,0,0.0,0
+14,26,kern,monterey,0.96200794,0.28117,0,0.0017,0
+14,35,kern,san bernardino,0.21117242,0.0,0,0.0,0
+14,39,kern,san luis obispo,0.39888138,0.0,0,0.0,0
+14,41,kern,santa barbara,0.84468985,0.18387,0,0.0,0
+14,53,kern,tulare,0.5161994,0.0,0,0.0,0
+14,55,kern,ventura,1.0089353,0.31333,0,0.0534,0
+15,26,kings,monterey,0.774299,0.10157,0,0.0,0
+15,39,kings,san luis obispo,0.21117243,0.0,0,0.0,0
+15,53,kings,tulare,0.7039083,0.0,0,0.0,0
+16,22,lake,mendocino,2.463679,0.67332,1,0.9869,1
+16,27,lake,napa,2.3228974,0.65766,1,0.9832,1
+16,48,lake,sonoma,3.0033422,0.72246,1,0.9972,1
+16,56,lake,yolo,3.2849054,0.74402,1,0.9983,1
+17,24,lassen,modoc,0.0,0.0,0,0.0,0
+17,31,lassen,plumas,0.0,0.0,0,0.0,0
+17,44,lassen,shasta,1.2435714,0.42534,0,0.1492,0
+17,45,lassen,sierra,0.0,0.0,0,0.0,0
+18,29,los angeles,orange,0.117318034,0.0,0,0.0,0
+18,35,los angeles,san bernardino,0.5161994,0.0,0,0.0,0
+18,55,los angeles,ventura,0.28156352,0.0,0,0.0,0
+19,21,madera,mariposa,2.0178707,0.61546,1,0.9578,1
+19,23,madera,merced,1.3608893,0.46664,0,0.1508,0
+19,25,madera,mono,0.46927226,0.0,0,0.0,0
+19,54,madera,tuolumne,2.0178707,0.61546,1,0.9578,1
+20,48,marin,sonoma,0.89161724,0.22733,0,0.0,0
+21,23,mariposa,merced,0.6569814,0.0,0,0.0,0
+21,49,mariposa,stanislaus,0.63351774,0.0,0,0.0,0
+21,54,mariposa,tuolumne,0.0,0.0,0,0.0,0
+22,48,mendocino,sonoma,0.5396631,0.0,0,0.0,0
+22,51,mendocino,tehama,0.9150807,0.24656,0,0.0,0
+22,52,mendocino,trinity,2.2759705,0.65229,1,0.9789,1
+23,34,merced,san benito,1.3843529,0.47366,0,0.1522,0
+23,42,merced,santa clara,1.8301616,0.58312,1,0.9443,1
+23,49,merced,stanislaus,0.023463696,0.0,0,0.0,0
+23,54,merced,tuolumne,0.6569814,0.0,0,0.0,0
+24,44,modoc,shasta,1.2435714,0.42534,0,0.1492,0
+24,46,modoc,siskiyou,2.2055795,0.6426,1,0.9739,1
+25,54,mono,tuolumne,1.5485985,0.52034,1,0.2571,0
+26,34,monterey,san benito,0.023463666,0.0,0,0.0,0
+26,39,monterey,san luis obispo,0.56312656,0.0,0,0.0,0
+26,43,monterey,santa cruz,0.023463666,0.0,0,0.0,0
+27,47,napa,solano,0.9620081,0.28117,0,0.0017,0
+27,48,napa,sonoma,0.68044484,0.0,0,0.0,0
+27,56,napa,yolo,0.9620081,0.28117,0,0.0017,0
+28,30,nevada,placer,1.4782076,0.50093,1,0.1673,0
+28,45,nevada,sierra,0.0,0.0,0,0.0,0
+28,57,nevada,yuba,1.6424526,0.5454,1,0.9123,1
+29,32,orange,riverside,0.16424525,0.0,0,0.0,0
+29,35,orange,san bernardino,0.63351744,0.0,0,0.0,0
+29,36,orange,san diego,0.023463726,0.0,0,0.0,0
+30,33,placer,sacramento,1.6189891,0.53965,1,0.7256,1
+30,50,placer,sutter,1.384353,0.47366,0,0.1522,0
+30,57,placer,yuba,3.1206603,0.73162,1,0.9977,1
+31,44,plumas,shasta,1.2435714,0.42534,0,0.1492,0
+31,45,plumas,sierra,0.0,0.0,0,0.0,0
+31,51,plumas,tehama,0.84468985,0.18387,0,0.0,0
+31,57,plumas,yuba,1.6424526,0.5454,1,0.9123,1
+32,35,riverside,san bernardino,0.4692722,0.0,0,0.0,0
+32,36,riverside,san diego,0.18770897,0.0,0,0.0,0
+33,38,sacramento,san joaquin,0.4927357,0.0,0,0.0,0
+33,47,sacramento,solano,1.0323988,0.32843,0,0.0688,0
+33,50,sacramento,sutter,0.23463613,0.0,0,0.0,0
+33,56,sacramento,yolo,1.0323988,0.32843,0,0.0688,0
+34,42,san benito,santa clara,0.44580853,0.0,0,0.0,0
+34,43,san benito,santa cruz,0.0,0.0,0,0.0,0
+37,40,san francisco,san mateo,0.9620082,0.28117,0,0.0017,0
+38,42,san joaquin,santa clara,1.2201078,0.41555,0,0.1459,0
+38,49,san joaquin,stanislaus,0.6335175,0.0,0,0.0,0
+39,41,san luis obispo,santa barbara,0.4458085,0.0,0,0.0,0
+40,42,san mateo,santa clara,0.44580877,0.0,0,0.0,0
+40,43,san mateo,santa cruz,0.8916173,0.22733,0,0.0,0
+41,55,santa barbara,ventura,0.16424549,0.0,0,0.0,0
+42,43,santa clara,santa cruz,0.44580853,0.0,0,0.0,0
+42,49,santa clara,stanislaus,1.8536252,0.58755,1,0.9471,1
+44,46,shasta,siskiyou,0.96200824,0.28117,0,0.0017,0
+44,51,shasta,tehama,0.39888155,0.0,0,0.0,0
+44,52,shasta,trinity,0.96200824,0.28117,0,0.0017,0
+45,57,sierra,yuba,1.6424526,0.5454,1,0.9123,1
+46,52,siskiyou,trinity,0.0,0.0,0,0.0,0
+47,56,solano,yolo,0.0,0.0,0,0.0,0
+49,54,stanislaus,tuolumne,0.63351774,0.0,0,0.0,0
+50,56,sutter,yolo,0.7977627,0.13213,0,0.0,0
+50,57,sutter,yuba,1.7363071,0.56501,1,0.9317,1
+51,52,tehama,trinity,1.3608898,0.46664,0,0.1508,0

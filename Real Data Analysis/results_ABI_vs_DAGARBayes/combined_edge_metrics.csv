@@ -1,0 +1,17 @@
+metric,value,dataset
+boundary_prob_correlation,0.8626140334929002,glasgow
+boundary_prob_mae,0.11929566666666667,glasgow
+abi_prob_vs_dissimilarity_corr,0.8933960536360935,glasgow
+dagarbayes_prob_vs_dissimilarity_corr,0.8304798874167771,glasgow
+median_boundary_count_abi,134.0,glasgow
+median_boundary_count_dagarbayes,99.0,glasgow
+median_boundary_overlap,99.0,glasgow
+median_boundary_jaccard,0.7388059701492538,glasgow
+boundary_prob_correlation,0.844522177224842,california
+boundary_prob_mae,0.12292079136690649,california
+abi_prob_vs_dissimilarity_corr,0.9447707002588379,california
+dagarbayes_prob_vs_dissimilarity_corr,0.8629055842407056,california
+median_boundary_count_abi,32.0,california
+median_boundary_count_dagarbayes,24.0,california
+median_boundary_overlap,24.0,california
+median_boundary_jaccard,0.75,california
