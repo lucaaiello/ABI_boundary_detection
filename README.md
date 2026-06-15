@@ -1,6 +1,6 @@
 ## Reproducing the manuscript and supplementary results
 
-This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Amortized Bayesian Boundary Detection on Varying-Size Graphs*.
+This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Spatial Disease Mapping and Boundary Detection Using Generative AI: An Amortized Bayesian Learning Framework*.
 
 The workflow has three main blocks:
 
