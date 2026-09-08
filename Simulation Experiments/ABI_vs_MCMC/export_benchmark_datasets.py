@@ -25,10 +25,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description=(
             "Export a benchmark bank of simulated datasets generated from the "
-            "same ABI-DAGAR simulator used in the 'more general' notebook."
+            "same ABI-DAGAR simulator used by the manuscript training workflow."
         )
     )
-    parser.add_argument("--num-datasets", type=int, default=48, help="Number of datasets to export.")
+    parser.add_argument("--num-datasets", type=int, default=100, help="Number of datasets to export.")
     parser.add_argument("--seed", type=int, default=123, help="Master random seed.")
     parser.add_argument(
         "--run-name",
@@ -138,11 +138,11 @@ def main() -> None:
         "fixed_n": args.fixed_n,
         "n_min": int(args.n_min),
         "n_max": int(args.n_max),
-        "dataset_dir": str(datasets_dir),
-        "r_input_dir": str(r_inputs_dir),
-        "manifest_file": str(output_dir / "benchmark_manifest.csv"),
+        "dataset_dir": "datasets",
+        "r_input_dir": "r_inputs",
+        "manifest_file": "benchmark_manifest.csv",
         "dataset_seeds": [int(x) for x in dataset_seeds.tolist()],
-        "generator": "ABI-DAGAR simulator from 'poisson regression w spatial adj rndm graph transformer more general.ipynb'",
+        "generator": "ABI-DAGAR simulator from Training/ABI_poisson_regression_DAGAR.ipynb",
     }
     write_json(output_dir / "benchmark_config.json", config)
 

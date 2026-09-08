@@ -1,0 +1,2 @@
+"dataset_name","gpkg_path","adjacency_path","N","edge_count","mean_neighbors","n_iter","burnin","thin","n_adapt","seed","z_median_adjacent","M_real","alpha_max","threshold","verbose"
+"glasgow","Data/respiratory_data_glasgow.gpkg","Data/adjacency_matrix_glasgow.csv",134,360,5.37313432835821,300000,100000,20,100000,2026082201,0.598718360679123,1.15771824367726,1.15771824367726,0.693147180559945,TRUE

@@ -1,0 +1,242 @@
+﻿display_id,area_id,area_name,atlas_region,area_name_korean
+K001,11110,Jongno-gu,NW,종로구
+K002,11140,Jung-gu,NW,중구
+K003,11170,Yongsan-gu,NW,용산구
+K004,11200,Seongdong-gu,NW,성동구
+K005,11215,Gwangjin-gu,NW,광진구
+K006,11230,Dongdaemun-gu,NW,동대문구
+K007,11260,Jungnang-gu,NW,중랑구
+K008,11290,Seongbuk-gu,NW,성북구
+K009,11305,Gangbuk-gu,NW,강북구
+K010,11320,Dobong-gu,NW,도봉구
+K011,11350,Nowon-gu,NW,노원구
+K012,11380,Eunpyeong-gu,NW,은평구
+K013,11410,Seodaemun-gu,NW,서대문구
+K014,11440,Mapo-gu,NW,마포구
+K015,11470,Yangcheon-gu,NW,양천구
+K016,11500,Gangseo-gu,NW,강서구
+K017,11530,Guro-gu,NW,구로구
+K018,11545,Geumcheon-gu,NW,금천구
+K019,11560,Yeongdeungpo-gu,NW,영등포구
+K020,11590,Dongjak-gu,NW,동작구
+K021,11620,Gwanak-gu,NW,관악구
+K022,11650,Seocho-gu,NW,서초구
+K023,11680,Gangnam-gu,NW,강남구
+K024,11710,Songpa-gu,NW,송파구
+K025,11740,Gangdong-gu,NW,강동구
+K026,26110,Jung-gu,SE,중구
+K027,26140,Seo-gu,SE,서구
+K028,26170,Dong-gu,SE,동구
+K029,26230,Busanjin-gu,SE,부산진구
+K030,26260,Dongnae-gu,SE,동래구
+K031,26290,Nam-gu,SE,남구
+K032,26320,Buk-gu,SE,북구
+K033,26350,Haeundae-gu,SE,해운대구
+K034,26380,Saha-gu,SE,사하구
+K035,26410,Geumjeong-gu,SE,금정구
+K036,26440,Gangseo-gu,SE,강서구
+K037,26470,Yeonje-gu,SE,연제구
+K038,26500,Suyeong-gu,SE,수영구
+K039,26530,Sasang-gu,SE,사상구
+K040,26710,Gijang-gun,SE,기장군
+K041,27110,Jung-gu,SE,중구
+K042,27140,Dong-gu,SE,동구
+K043,27170,Seo-gu,SE,서구
+K044,27200,Nam-gu,SE,남구
+K045,27230,Buk-gu,SE,북구
+K046,27260,Suseong-gu,SE,수성구
+K047,27290,Dalseo-gu,SE,달서구
+K048,27710,Dalseong-gun,SE,달성군
+K049,28110,Jung-gu,NW,중구
+K050,28140,Dong-gu,NW,동구
+K051,28177,Michuhol-gu,NW,미추홀구
+K052,28185,Yeonsu-gu,NW,연수구
+K053,28200,Namdong-gu,NW,남동구
+K054,28237,Bupyeong-gu,NW,부평구
+K055,28245,Gyeyang-gu,NW,계양구
+K056,28260,Seo-gu,NW,서구
+K057,29110,Dong-gu,SW,동구
+K058,29140,Seo-gu,SW,서구
+K059,29155,Nam-gu,SW,남구
+K060,29170,Buk-gu,SW,북구
+K061,29200,Gwangsan-gu,SW,광산구
+K062,30110,Dong-gu,SE,동구
+K063,30140,Jung-gu,SE,중구
+K064,30170,Seo-gu,SE,서구
+K065,30200,Yuseong-gu,SE,유성구
+K066,30230,Daedeok-gu,SE,대덕구
+K067,31110,Jung-gu,SE,중구
+K068,31140,Nam-gu,SE,남구
+K069,31170,Dong-gu,SE,동구
+K070,31200,Buk-gu,SE,북구
+K071,31710,Ulju-gun,SE,울주군
+K072,36110,Sejong-si,NW,세종특별자치시
+K073,41111,"Jangan-gu, Suwon-si",NW,수원시 장안구
+K074,41113,"Gwonseon-gu, Suwon-si",NW,수원시 권선구
+K075,41115,"Paldal-gu, Suwon-si",NW,수원시 팔달구
+K076,41117,"Yeongtong-gu, Suwon-si",NW,수원시 영통구
+K077,41131,"Sujeong-gu, Seongnam-si",NW,성남시 수정구
+K078,41133,"Jungwon-gu, Seongnam-si",NW,성남시 중원구
+K079,41135,"Bundang-gu, Seongnam-si",NW,성남시 분당구
+K080,41150,Uijeongbu-si,NW,의정부시
+K081,41171,"Manan-gu, Anyang-si",NW,안양시만안구
+K082,41173,"Dongan-gu, Anyang-si",NW,안양시동안구
+K083,41190,Bucheon-si,NW,부천시
+K084,41210,Gwangmyeong-si,NW,광명시
+K085,41220,Pyeongtaek-si,NW,평택시
+K086,41250,Dongducheon-si,NW,동두천시
+K087,41271,"Sangnok-gu, Ansan-si",NW,안산시상록구
+K088,41273,"Danwon-gu, Ansan-si",NW,안산시단원구
+K089,41281,"Deogyang-gu, Goyang-si",NW,고양시덕양구
+K090,41285,"Ilsandong-gu, Goyang-si",NW,고양시일산동구
+K091,41287,"Ilsanseo-gu, Goyang-si",NW,고양시일산서구
+K092,41290,Gwacheon-si,NW,과천시
+K093,41310,Guri-si,NW,구리시
+K094,41360,Namyangju-si,NW,남양주시
+K095,41370,Osan-si,NW,오산시
+K096,41390,Siheung-si,NW,시흥시
+K097,41410,Gunpo-si,NW,군포시
+K098,41430,Uiwang-si,NW,의왕시
+K099,41450,Hanam-si,NW,하남시
+K100,41461,"Cheoin-gu, Yongin-si",NW,용인시처인구
+K101,41463,"Giheung-gu, Yongin-si",NW,용인시기흥구
+K102,41465,"Suji-gu, Yongin-si",NW,용인시수지구
+K103,41480,Paju-si,NW,파주시
+K104,41500,Icheon-si,NE,이천시
+K105,41550,Anseong-si,NW,안성시
+K106,41570,Gimpo-si,NW,김포시
+K107,41590,Hwaseong-si,NW,화성시
+K108,41610,Gwangju-si,NW,광주시
+K109,41630,Yangju-si,NW,양주시
+K110,41650,Pocheon-si,NW,포천시
+K111,41670,Yeoju-si,NE,여주시
+K112,41800,Yeoncheon-gun,NW,연천군
+K113,41820,Gapyeong-gun,NE,가평군
+K114,41830,Yangpyeong-gun,NE,양평군
+K115,42110,Chuncheon-si,NE,춘천시
+K116,42130,Wonju-si,NE,원주시
+K117,42150,Gangneung-si,NE,강릉시
+K118,42170,Donghae-si,NE,동해시
+K119,42190,Taebaek-si,NE,태백시
+K120,42210,Sokcho-si,NE,속초시
+K121,42230,Samcheok-si,NE,삼척시
+K122,42720,Hongcheon-gun,NE,홍천군
+K123,42730,Hoengseong-gun,NE,횡성군
+K124,42750,Yeongwol-gun,NE,영월군
+K125,42760,Pyeongchang-gun,NE,평창군
+K126,42770,Jeongseon-gun,NE,정선군
+K127,42780,Cheorwon-gun,NE,철원군
+K128,42790,Hwacheon-gun,NE,화천군
+K129,42800,Yanggu-gun,NE,양구군
+K130,42810,Inje-gun,NE,인제군
+K131,42820,Goseong-gun,NE,고성군
+K132,42830,Yangyang-gun,NE,양양군
+K133,43111,"Sangdang-gu, Cheongju-si",NE,청주시 상당구
+K134,43112,"Seowon-gu, Cheongju-si",NE,청주시 서원구
+K135,43113,"Heungdeok-gu, Cheongju-si",NE,청주시 흥덕구
+K136,43114,"Cheongwon-gu, Cheongju-si",NE,청주시 청원구
+K137,43130,Chungju-si,NE,충주시
+K138,43150,Jecheon-si,NE,제천시
+K139,43720,Boeun-gun,NE,보은군
+K140,43730,Okcheon-gun,SE,옥천군
+K141,43740,Yeongdong-gun,SE,영동군
+K142,43745,Jeungpyeong-gun,NE,증평군
+K143,43750,Jincheon-gun,NE,진천군
+K144,43760,Goesan-gun,NE,괴산군
+K145,43770,Eumseong-gun,NE,음성군
+K146,43800,Danyang-gun,NE,단양군
+K147,44131,"Dongnam-gu, Cheonan-si",NW,천안시동남구
+K148,44133,"Seobuk-gu, Cheonan-si",NW,천안시서북구
+K149,44150,Gongju-si,SW,공주시
+K150,44180,Boryeong-si,SW,보령시
+K151,44200,Asan-si,NW,아산시
+K152,44210,Seosan-si,NW,서산시
+K153,44230,Nonsan-si,SW,논산시
+K154,44250,Gyeryong-si,SW,계룡시
+K155,44270,Dangjin-si,NW,당진시
+K156,44710,Geumsan-gun,SE,금산군
+K157,44760,Buyeo-gun,SW,부여군
+K158,44770,Seocheon-gun,SW,서천군
+K159,44790,Cheongyang-gun,SW,청양군
+K160,44800,Hongseong-gun,NW,홍성군
+K161,44810,Yesan-gun,NW,예산군
+K162,44825,Taean-gun,NW,태안군
+K163,45111,"Wansan-gu, Jeonju-si",SW,전주시완산구
+K164,45113,"Deokjin-gu, Jeonju-si",SW,전주시덕진구
+K165,45130,Gunsan-si,SW,군산시
+K166,45140,Iksan-si,SW,익산시
+K167,45180,Jeongeup-si,SW,정읍시
+K168,45190,Namwon-si,SE,남원시
+K169,45210,Gimje-si,SW,김제시
+K170,45710,Wanju-gun,SW,완주군
+K171,45720,Jinan-gun,SE,진안군
+K172,45730,Muju-gun,SE,무주군
+K173,45740,Jangsu-gun,SE,장수군
+K174,45750,Imsil-gun,SW,임실군
+K175,45770,Sunchang-gun,SW,순창군
+K176,45790,Gochang-gun,SW,고창군
+K177,45800,Buan-gun,SW,부안군
+K178,46110,Mokpo-si,SW,목포시
+K179,46130,Yeosu-si,SE,여수시
+K180,46150,Suncheon-si,SE,순천시
+K181,46170,Naju-si,SW,나주시
+K182,46230,Gwangyang-si,SE,광양시
+K183,46710,Damyang-gun,SW,담양군
+K184,46720,Gokseong-gun,SW,곡성군
+K185,46730,Gurye-gun,SE,구례군
+K186,46770,Goheung-gun,SW,고흥군
+K187,46780,Boseong-gun,SW,보성군
+K188,46790,Hwasun-gun,SW,화순군
+K189,46800,Jangheung-gun,SW,장흥군
+K190,46810,Gangjin-gun,SW,강진군
+K191,46820,Haenam-gun,SW,해남군
+K192,46830,Yeongam-gun,SW,영암군
+K193,46840,Muan-gun,SW,무안군
+K194,46860,Hampyeong-gun,SW,함평군
+K195,46870,Yeonggwang-gun,SW,영광군
+K196,46880,Jangseong-gun,SW,장성군
+K197,46900,Jindo-gun,SW,진도군
+K198,46910,Sinan-gun,SW,신안군
+K199,47111,"Nam-gu, Pohang-si",SE,포항시 남구
+K200,47113,"Buk-gu, Pohang-si",SE,포항시 북구
+K201,47130,Gyeongju-si,SE,경주시
+K202,47150,Gimcheon-si,SE,김천시
+K203,47170,Andong-si,NE,안동시
+K204,47190,Gumi-si,SE,구미시
+K205,47210,Yeongju-si,NE,영주시
+K206,47230,Yeongcheon-si,SE,영천시
+K207,47250,Sangju-si,SE,상주시
+K208,47280,Mungyeong-si,NE,문경시
+K209,47290,Gyeongsan-si,SE,경산시
+K210,47720,Gunwi-gun,SE,군위군
+K211,47730,Uiseong-gun,SE,의성군
+K212,47750,Cheongsong-gun,SE,청송군
+K213,47760,Yeongyang-gun,NE,영양군
+K214,47770,Yeongdeok-gun,SE,영덕군
+K215,47820,Cheongdo-gun,SE,청도군
+K216,47830,Goryeong-gun,SE,고령군
+K217,47840,Seongju-gun,SE,성주군
+K218,47850,Chilgok-gun,SE,칠곡군
+K219,47900,Yecheon-gun,NE,예천군
+K220,47920,Bonghwa-gun,NE,봉화군
+K221,47930,Uljin-gun,NE,울진군
+K222,48121,"Uichang-gu, Changwon-si",SE,창원시 의창구
+K223,48123,"Seongsan-gu, Changwon-si",SE,창원시 성산구
+K224,48125,"Masanhappo-gu, Changwon-si",SE,창원시 마산합포구
+K225,48127,"Masanhoewon-gu, Changwon-si",SE,창원시 마산회원구
+K226,48129,"Jinhae-gu, Changwon-si",SE,창원시 진해구
+K227,48170,Jinju-si,SE,진주시
+K228,48220,Tongyeong-si,SE,통영시
+K229,48240,Sacheon-si,SE,사천시
+K230,48250,Gimhae-si,SE,김해시
+K231,48270,Miryang-si,SE,밀양시
+K232,48330,Yangsan-si,SE,양산시
+K233,48720,Uiryeong-gun,SE,의령군
+K234,48730,Haman-gun,SE,함안군
+K235,48740,Changnyeong-gun,SE,창녕군
+K236,48820,Goseong-gun,SE,고성군
+K237,48850,Hadong-gun,SE,하동군
+K238,48860,Sancheong-gun,SE,산청군
+K239,48870,Hamyang-gun,SE,함양군
+K240,48880,Geochang-gun,SE,거창군
+K241,48890,Hapcheon-gun,SE,합천군

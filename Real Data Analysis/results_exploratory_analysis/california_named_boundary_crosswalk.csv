@@ -1,0 +1,7 @@
+﻿rank,from_id,from_name,to_id,to_name,boundary_probability_abi,standardized_edge_dissimilarity,raw_covariate_difference,from_sir,to_sir
+1,lake,Lake,yolo,Yolo,0.74335,3.2849054,14.0,1.71911004360811,1.01432743109361
+2,placer,Placer,yuba,Yuba,0.73138,3.1206603,13.3,1.05740616147179,1.56598976458233
+3,lake,Lake,sonoma,Sonoma,0.72184,3.0033422,12.8,1.71911004360811,1.02308984073173
+4,del norte,Del Norte,humboldt,Humboldt,0.66871,2.4167523,10.299999999999999,1.28610539799208,1.34380861070259
+5,humboldt,Humboldt,siskiyou,Siskiyou,0.66871,2.4167523,10.299999999999999,1.34380861070259,1.20603476262884
+6,mendocino,Mendocino,trinity,Trinity,0.65173,2.2759705,9.7,1.15981416059499,1.40507614874743

@@ -1,0 +1,135 @@
+﻿display_id,area_id,area_name,atlas_region
+G001,s02000260,Auchinairn,NE
+G002,s02000261,Woodhill East,NE
+G003,s02000262,Woodhill West,NE
+G004,s02000263,Westerton East,NW
+G005,s02000264,Bishopbriggs West and Cadder,NE
+G006,s02000265,Westerton West,NW
+G007,s02000266,Kessington East,NW
+G008,s02000267,Lenzie South,NE
+G009,s02000268,Bishopbriggs North and Kenmure,NE
+G010,s02000269,Kessington West,NW
+G011,s02000270,Lenzie North,NE
+G012,s02000271,South Castlehill and Thorn,NW
+G013,s02000272,Kilmardinny West,NW
+G014,s02000273,Kilmardinny East,NW
+G015,s02000274,Rosebank and Waterside,NE
+G016,s02000275,Kirkintilloch South,NE
+G017,s02000276,North Castlehill and Thorn,NW
+G018,s02000277,Hillhead,NE
+G019,s02000278,Torrance and Balmore,NE
+G020,s02000279,Keystone and Dougalston,NW
+G021,s02000280,Harestanes,NE
+G022,s02000281,Kirkintilloch West,NE
+G023,s02000282,Barloch,NW
+G024,s02000283,Twechar and Harestanes East,NE
+G025,s02000284,East Clober and Mains Estate,NW
+G026,s02000285,West Clober and Mains Estate,NW
+G027,s02000286,Milton of Campsie,NE
+G028,s02000287,Lennoxtown,NE
+G029,s02000611,Shettleston South,SE
+G030,s02000613,Carmyle and Mount Vernon South,SE
+G031,s02000618,Baillieston East,SE
+G032,s02000619,Dalmarnock,SE
+G033,s02000620,Braidfauld,SE
+G034,s02000623,Mount Vernon North and Sandyhills,SE
+G035,s02000626,Baillieston West,SE
+G036,s02000629,Parkhead East and Braidfauld North,SE
+G037,s02000630,Tollcross,SE
+G038,s02000632,Shettleston North,SE
+G039,s02000633,Parkhead West and Barrowfield,SE
+G040,s02000635,"Calton, Galllowgate and Bridgeton",SE
+G041,s02000636,Garrowhill West,SE
+G042,s02000640,Greenfield,SE
+G043,s02000643,Old Shettleston and Parkhead North,SE
+G044,s02000645,Garrowhill East and Swinton,SE
+G045,s02000646,Barlanark,SE
+G046,s02000647,Gallowgate North and Bellgrove,SE
+G047,s02000648,Carntyne West and Haghill,SE
+G048,s02000650,Dennistoun,SE
+G049,s02000651,Anderston,SW
+G050,s02000652,North Barlanark and Easterhouse South,SE
+G051,s02000653,Easterhouse East,SE
+G052,s02000654,"Cranhill, Lightburn and Queenslie South",SE
+G053,s02000655,City Centre West,SE
+G054,s02000657,Carntyne,SE
+G055,s02000658,City Centre East,SE
+G056,s02000659,Dennistoun North and Alexandra Parade,SE
+G057,s02000661,Finnieston and Kelvinhaugh,SW
+G058,s02000662,Central Easterhouse,SE
+G059,s02000663,Craigend and Ruchazie,SE
+G060,s02000664,Hillhead,SW
+G061,s02000665,Woodlands,SE
+G062,s02000666,"Roystonhill, Blochairn, and Provanmill",SE
+G063,s02000667,Riddrie and Hogganfield,SE
+G064,s02000668,Glasgow Harbour and  Partick South,SW
+G065,s02000669,Woodside,SE
+G066,s02000670,Sighthill,SE
+G067,s02000671,Partick,SW
+G068,s02000672,Kelvingrove and University,SW
+G069,s02000673,Whiteinch,SW
+G070,s02000674,"Garthamlock, Auchinlea and Gartloch",SE
+G071,s02000675,Firhill,SW
+G072,s02000676,Cowlairs and Port Dundas,SE
+G073,s02000677,Partickhill and Hyndland,SW
+G074,s02000678,Blackhill and Barmulloch East,SE
+G075,s02000679,Broomhill,SW
+G076,s02000680,Petershill,SE
+G077,s02000681,Dowanhill,SW
+G078,s02000682,Victoria Park,SW
+G079,s02000683,North Kelvin,SW
+G080,s02000684,Scotstoun South and West,SW
+G081,s02000685,Keppochhill,SE
+G082,s02000686,Scotstoun North and East,SW
+G083,s02000687,Barmulloch,SE
+G084,s02000688,Ruchill,SW
+G085,s02000689,Kelvinside and Jordanhill,SW
+G086,s02000690,Kelvindale,SW
+G087,s02000691,Springburn,SE
+G088,s02000692,Possil Park,SE
+G089,s02000693,Wyndford,SW
+G090,s02000694,Springburn East and Cowlairs,SE
+G091,s02000695,Robroyston and Millerston,SE
+G092,s02000696,Yoker South,SW
+G093,s02000697,Balornock,SE
+G094,s02000698,Knightswood Park East,SW
+G095,s02000699,Knightswood East,SW
+G096,s02000700,Maryhill West,NW
+G097,s02000701,Milton West,NE
+G098,s02000702,Anniesland East,NW
+G099,s02000703,Knightswood West,NW
+G100,s02000704,Maryhill East,NW
+G101,s02000705,Anniesland West,NW
+G102,s02000706,Knightswood Park West,NW
+G103,s02000707,Yoker North,NW
+G104,s02000708,Milton East,NE
+G105,s02000709,Blairdardie East,NW
+G106,s02000710,Summerston North,NW
+G107,s02000711,Blairdardie West,NW
+G108,s02000712,Drumchapel South,NW
+G109,s02000713,Summerston Central and West,NW
+G110,s02000714,Drumry West,NW
+G111,s02000715,Drumchapel North,NW
+G112,s02000716,Drumry East,NW
+G113,s02000923,Stepps,NE
+G114,s02000925,Chryston and Muirhead,NE
+G115,s02000926,Moodiesburn West,NE
+G116,s02000927,Moodiesburn East,NE
+G117,s02001184,IZ One,NW
+G118,s02001185,IZ Two,NW
+G119,s02001186,IZ Three,NW
+G120,s02001187,IZ Four,NW
+G121,s02001188,IZ Five,NW
+G122,s02001189,IZ Six,NW
+G123,s02001190,IZ Seven,NW
+G124,s02001191,IZ Eight,NW
+G125,s02001192,IZ Nine,NW
+G126,s02001193,IZ Ten,NW
+G127,s02001194,IZ Eleven,NW
+G128,s02001195,IZ Twelve,NW
+G129,s02001196,IZ Thirteen,NW
+G130,s02001197,IZ Fourteen,NW
+G131,s02001198,IZ Fifteen,NW
+G132,s02001199,IZ Sixteen,NW
+G133,s02001200,IZ Seventeen,NW
+G134,s02001201,IZ Eighteen,NW

@@ -1,0 +1,2 @@
+"dataset_name","gpkg_path","adjacency_path","N","edge_count","mean_neighbors","n_iter","burnin","thin","n_adapt","seed","z_median_adjacent","M_real","alpha_max","threshold","verbose"
+"california","Data/respiratory_data_california.gpkg","Data/adjacency_matrix_california.csv",58,139,4.79310344827586,300000,100000,20,100000,2026082203,0.703908376878757,0.984712206134482,0.984712206134482,0.693147180559945,TRUE

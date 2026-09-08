@@ -1,0 +1,4 @@
+Application,Outcome,Period,Spatial unit,Count input,Expected-count input,Boundary-driving covariate
+Greater Glasgow,Respiratory hospitalizations,2010,Intermediate Zone,observed,expected,Income deprivation (%)
+California,Lung-cancer incidence,Study period,County,lung_O_count,lung_E_count,Adult smoking prevalence (%)
+South Korea,"Tracheal, bronchial, and lung cancer mortality",2015-2019,Municipality,observed_lung_cancer,expected_lung_cancer,Current smoking prevalence (%)

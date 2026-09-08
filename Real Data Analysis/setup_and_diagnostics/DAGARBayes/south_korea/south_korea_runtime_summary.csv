@@ -1,0 +1,2 @@
+"dataset_name","n_iter","burnin","thin","n_adapt","n_saved_draws","elapsed_sec","seconds_per_saved_draw","seconds_per_1000_saved_draws","seed","z_median_adjacent","M_real","alpha_max","threshold"
+"south_korea",300000,100000,20,100000,10000,66.19,0.006619,6.619,2026082204,0.698340285613203,0.992563632535771,0.992563632535771,0.693147180559945

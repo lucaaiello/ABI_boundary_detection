@@ -3,8 +3,8 @@ rm(list = ls())
 options(stringsAsFactors = FALSE)
 
 script_config <- list(
-  benchmark_dir = "C:/Dati/Lavori/Aiello_Banerjee_2026/Code/ABI_poisson_regression/Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100",
-  results_dir = "C:/Dati/Lavori/Aiello_Banerjee_2026/Code/ABI_poisson_regression/Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100",
+  benchmark_dir = NULL,
+  results_dir = NULL,
   dataset_ids = NULL,
   max_datasets = NULL,
   n_iter = 20000L,
@@ -14,7 +14,7 @@ script_config <- list(
   chains = 1L,
   seed = 123L,
   threshold = log(2.0),
-  save_draws = TRUE,
+  save_draws = FALSE,
   verbose_sampler = FALSE,
   use_null_makevars = FALSE
 )
@@ -62,14 +62,20 @@ get_script_dir <- function() {
   normalizePath(getwd())
 }
 
-find_existing_parent <- function(start_dir, target_file, max_up = 6L) {
+find_project_parent <- function(start_dir, max_up = 6L) {
   if (is.null(start_dir)) {
     return(NULL)
   }
   current <- normalizePath(start_dir, winslash = "/", mustWork = FALSE)
   for (step in seq_len(max_up + 1L)) {
-    candidate <- file.path(current, target_file)
-    if (file.exists(candidate)) {
+    has_training <- dir.exists(file.path(current, "Training"))
+    has_benchmark <- file.exists(file.path(
+      current,
+      "Simulation Experiments",
+      "ABI_vs_MCMC",
+      "dagar_poisson_boundary_mwg.cpp"
+    ))
+    if (has_training && has_benchmark) {
       return(current)
     }
     parent <- dirname(current)
@@ -82,20 +88,29 @@ find_existing_parent <- function(start_dir, target_file, max_up = 6L) {
 }
 
 resolve_project_root <- function(script_dir, benchmark_dir) {
-  target_file <- "ABI_poisson_regression.code-workspace"
   candidates <- c(
-    find_existing_parent(script_dir, target_file),
-    find_existing_parent(benchmark_dir, target_file),
-    find_existing_parent(getwd(), target_file)
+    find_project_parent(script_dir),
+    find_project_parent(benchmark_dir),
+    find_project_parent(getwd())
   )
   candidates <- Filter(Negate(is.null), candidates)
   if (length(candidates) == 0) {
     stop(
-      "Could not locate ", target_file,
-      ". Checked upward from the script directory, benchmark directory, and current working directory."
+      "Could not locate the ABI_poisson_regression repository root. ",
+      "Checked upward from the script directory, benchmark directory, and current working directory."
     )
   }
   normalizePath(candidates[[1]], winslash = "/", mustWork = TRUE)
+}
+
+portable_project_path <- function(path, project_root) {
+  normalized_path <- normalizePath(path, winslash = "/", mustWork = FALSE)
+  normalized_root <- normalizePath(project_root, winslash = "/", mustWork = TRUE)
+  root_prefix <- paste0(normalized_root, "/")
+  if (startsWith(normalized_path, root_prefix)) {
+    return(substring(normalized_path, nchar(root_prefix) + 1L))
+  }
+  normalized_path
 }
 
 as_int <- function(x, default = NULL) {
@@ -168,6 +183,102 @@ summarize_draws <- function(samples, truth, dataset_id, parameter) {
   )
 }
 
+estimate_chain_precision <- function(samples, parameter) {
+  samples <- as.numeric(samples)
+  samples <- samples[is.finite(samples)]
+  n_draws <- length(samples)
+
+  if (n_draws < 3L || !is.finite(var(samples)) || var(samples) <= 0) {
+    warning("Cannot estimate ESS and MCSE for ", parameter, ": insufficient variation in the retained draws.")
+    return(list(
+      n_draws = n_draws,
+      spectral_variance = NA_real_,
+      effective_sample_size = NA_real_,
+      method = NA_character_
+    ))
+  }
+
+  spectral_fit <- tryCatch(
+    coda::spectrum0.ar(coda::mcmc(samples)),
+    error = function(error) NULL
+  )
+  method <- "coda::spectrum0.ar"
+
+  if (is.null(spectral_fit) || !is.finite(spectral_fit$spec[[1]]) || spectral_fit$spec[[1]] <= 0) {
+    spectral_fit <- tryCatch(
+      coda::spectrum0(coda::mcmc(samples)),
+      error = function(error) NULL
+    )
+    method <- "coda::spectrum0"
+  }
+
+  if (is.null(spectral_fit) || !is.finite(spectral_fit$spec[[1]]) || spectral_fit$spec[[1]] <= 0) {
+    warning("Cannot estimate ESS and MCSE for ", parameter, ": spectral variance estimation failed.")
+    return(list(
+      n_draws = n_draws,
+      spectral_variance = NA_real_,
+      effective_sample_size = NA_real_,
+      method = NA_character_
+    ))
+  }
+
+  spectral_variance <- as.numeric(spectral_fit$spec[[1]])
+  effective_sample_size <- n_draws * var(samples) / spectral_variance
+
+  list(
+    n_draws = n_draws,
+    spectral_variance = spectral_variance,
+    effective_sample_size = effective_sample_size,
+    method = method
+  )
+}
+
+summarize_mcmc_precision <- function(chain_list, parameter) {
+  clean_chains <- lapply(chain_list, function(samples) {
+    samples <- as.numeric(samples)
+    samples[is.finite(samples)]
+  })
+  chain_stats <- lapply(clean_chains, estimate_chain_precision, parameter = parameter)
+  n_draws_total <- sum(vapply(chain_stats, function(x) x$n_draws, numeric(1)))
+  pooled_samples <- unlist(clean_chains, use.names = FALSE)
+  posterior_sd <- if (length(pooled_samples) > 1L) sd(pooled_samples) else NA_real_
+
+  valid <- vapply(
+    chain_stats,
+    function(x) is.finite(x$spectral_variance) && is.finite(x$effective_sample_size),
+    logical(1)
+  )
+
+  if (n_draws_total == 0L || !all(valid)) {
+    effective_sample_size <- NA_real_
+    spectral_variance <- NA_real_
+    mcse_mean <- NA_real_
+  } else {
+    effective_sample_size <- sum(vapply(chain_stats, function(x) x$effective_sample_size, numeric(1)))
+    weighted_spectral_sum <- sum(vapply(
+      chain_stats,
+      function(x) x$n_draws * x$spectral_variance,
+      numeric(1)
+    ))
+    spectral_variance <- weighted_spectral_sum / n_draws_total
+    mcse_mean <- sqrt(weighted_spectral_sum) / n_draws_total
+  }
+
+  data.frame(
+    parameter = parameter,
+    n_chains = length(chain_list),
+    n_draws_total = n_draws_total,
+    posterior_sd = posterior_sd,
+    spectral_variance = spectral_variance,
+    effective_sample_size = effective_sample_size,
+    ess_per_draw = effective_sample_size / n_draws_total,
+    mcse_mean = mcse_mean,
+    mcse_over_posterior_sd = mcse_mean / posterior_sd,
+    method = paste(unique(na.omit(vapply(chain_stats, function(x) x$method, character(1)))), collapse = ";"),
+    stringsAsFactors = FALSE
+  )
+}
+
 compute_rhat <- function(chain_list) {
   if (length(chain_list) < 2) {
     return(NA_real_)
@@ -187,6 +298,51 @@ compute_rhat <- function(chain_list) {
   b <- n * var(chain_means)
   var_hat <- ((n - 1) / n) * w + (b / n)
   sqrt(var_hat / w)
+}
+
+build_chain_diagnostics <- function(chain_draws, dataset_id) {
+  diagnostic_parameters <- c("beta0", "sigma2_w", "eta_raw", "eta", "rho")
+  missing_parameters <- setdiff(diagnostic_parameters, names(chain_draws[[1]]))
+  if (length(missing_parameters) > 0L) {
+    stop(
+      "Missing posterior-draw columns for ", dataset_id, ": ",
+      paste(missing_parameters, collapse = ", ")
+    )
+  }
+
+  precision_df <- do.call(
+    rbind,
+    lapply(
+      diagnostic_parameters,
+      function(parameter) {
+        summarize_mcmc_precision(
+          lapply(chain_draws, function(draws) draws[[parameter]]),
+          parameter
+        )
+      }
+    )
+  )
+
+  data.frame(
+    dataset_id = dataset_id,
+    parameter = diagnostic_parameters,
+    rhat = vapply(
+      diagnostic_parameters,
+      function(parameter) compute_rhat(lapply(chain_draws, function(draws) draws[[parameter]])),
+      numeric(1)
+    ),
+    n_chains = precision_df$n_chains,
+    n_draws_per_chain = min(vapply(chain_draws, nrow, integer(1))),
+    n_draws_total = precision_df$n_draws_total,
+    posterior_sd = precision_df$posterior_sd,
+    spectral_variance = precision_df$spectral_variance,
+    effective_sample_size = precision_df$effective_sample_size,
+    ess_per_draw = precision_df$ess_per_draw,
+    mcse_mean = precision_df$mcse_mean,
+    mcse_over_posterior_sd = precision_df$mcse_over_posterior_sd,
+    method = precision_df$method,
+    stringsAsFactors = FALSE
+  )
 }
 
 compute_auc <- function(prob, truth) {
@@ -224,16 +380,18 @@ args <- parse_args(commandArgs(trailingOnly = TRUE))
 
 benchmark_dir <- pick_value(args, script_config, "benchmark-dir")
 if (is.null(benchmark_dir)) {
-  stop("Please provide --benchmark-dir, or set script_config$benchmark_dir at the top of this file.")
+  benchmark_dir <- file.path(
+    get_script_dir(), "datasets", "benchmark_bank_seed123_n100"
+  )
 }
 benchmark_dir <- normalizePath(benchmark_dir, mustWork = TRUE)
-project_root <- resolve_project_root(get_script_dir(), benchmark_dir)
 
 results_dir <- pick_value(args, script_config, "results-dir")
 if (is.null(results_dir)) {
-  results_dir <- file.path(benchmark_dir, "mcmc_results")
+  results_dir <- file.path(benchmark_dir, "mcmc_results_all100")
 }
 results_dir <- normalizePath(results_dir, mustWork = FALSE)
+project_root <- resolve_project_root(get_script_dir(), benchmark_dir)
 
 if (as_flag(pick_value(args, script_config, "use-null-makevars"), default = FALSE)) {
   Sys.setenv(R_MAKEVARS_USER = "NUL")
@@ -246,7 +404,7 @@ n_adapt <- as_int(pick_value(args, script_config, "n-adapt"), default = 2000L)
 chains <- as_int(pick_value(args, script_config, "chains"), default = 4L)
 seed <- as_int(pick_value(args, script_config, "seed"), default = 123L)
 threshold <- as_num(pick_value(args, script_config, "threshold"), default = log(2.0))
-save_draws <- as_flag(pick_value(args, script_config, "save-draws"), default = TRUE)
+save_draws <- as_flag(pick_value(args, script_config, "save-draws"), default = FALSE)
 verbose_sampler <- as_flag(pick_value(args, script_config, "verbose-sampler"), default = FALSE)
 
 if (n_iter <= 0 || burnin < 0 || thin <= 0 || n_adapt < 0 || chains <= 0) {
@@ -295,9 +453,13 @@ dir.create(results_dir, recursive = TRUE, showWarnings = FALSE)
 per_dataset_dir <- file.path(results_dir, "per_dataset")
 dir.create(per_dataset_dir, recursive = TRUE, showWarnings = FALSE)
 
+if (!requireNamespace("coda", quietly = TRUE)) {
+  stop("Package 'coda' is required to compute MCMC ESS and MCSE diagnostics.")
+}
+
 config_df <- data.frame(
-  benchmark_dir = benchmark_dir,
-  results_dir = results_dir,
+  benchmark_dir = portable_project_path(benchmark_dir, project_root),
+  results_dir = portable_project_path(results_dir, project_root),
   dataset_ids = if (is.null(dataset_ids)) "" else paste(dataset_ids, collapse = ","),
   max_datasets = if (is.null(max_datasets)) NA_integer_ else max_datasets,
   n_iter = n_iter,
@@ -316,7 +478,7 @@ if (!requireNamespace("Rcpp", quietly = TRUE)) {
   stop("Package 'Rcpp' is required.")
 }
 
-Rcpp::sourceCpp(file.path(project_root, "dagar_poisson_boundary_mwg.cpp"))
+Rcpp::sourceCpp(file.path(get_script_dir(), "dagar_poisson_boundary_mwg.cpp"))
 
 all_parameter_summaries <- list()
 all_chain_diagnostics <- list()
@@ -457,20 +619,7 @@ for (row_idx in seq_len(nrow(manifest))) {
     )
   )
 
-  chain_diag_df <- data.frame(
-    dataset_id = dataset_id,
-    parameter = c("beta0", "sigma2_w", "eta_raw", "eta", "rho"),
-    rhat = c(
-      compute_rhat(lapply(chain_draws, function(x) x$beta0)),
-      compute_rhat(lapply(chain_draws, function(x) x$sigma2_w)),
-      compute_rhat(lapply(chain_draws, function(x) x$eta_raw)),
-      compute_rhat(lapply(chain_draws, function(x) x$eta)),
-      compute_rhat(lapply(chain_draws, function(x) x$rho))
-    ),
-    n_chains = chains,
-    n_draws_per_chain = nrow(chain_draws[[1]]),
-    stringsAsFactors = FALSE
-  )
+  chain_diag_df <- build_chain_diagnostics(chain_draws, dataset_id)
 
   boundary_prob <- compute_boundary_probabilities(draws_df$eta, edge_table$edge_z, threshold = threshold)
   edge_prob_df <- edge_table

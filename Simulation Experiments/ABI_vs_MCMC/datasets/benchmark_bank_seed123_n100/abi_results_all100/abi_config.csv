@@ -1,0 +1,2 @@
+benchmark_dir,results_dir,checkpoint,mcmc_reference_sampler,num_samples,seed,dataset_ids,max_datasets,save_draws
+Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100,Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/abi_results_all100,Training/Checkpoints/poisson_dagar.keras,dagar_poisson_boundary_mwg.cpp,10000,123,,,True

@@ -1,0 +1,2 @@
+"benchmark_dir","results_dir","dataset_ids","max_datasets","n_iter","burnin","thin","n_adapt","chains","seed","threshold","save_draws"
+"Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100","Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/mcmc_results_all100","",NA,20000,10000,1,10000,1,123,0.693147180559945,TRUE

@@ -1,0 +1,2 @@
+"dataset_name","n_iter","burnin","thin","n_adapt","n_saved_draws","elapsed_sec","seconds_per_saved_draw","seconds_per_1000_saved_draws","seed","z_median_adjacent","M_real","alpha_max","threshold"
+"glasgow",300000,100000,20,100000,10000,28.36,0.002836,2.836,2026082201,0.598718360679123,1.15771824367726,1.15771824367726,0.693147180559945

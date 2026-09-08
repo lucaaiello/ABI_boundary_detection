@@ -1,0 +1,4 @@
+"dataset_name","parameter","n_chains","n_draws_total","posterior_sd","spectral_variance","effective_sample_size","ess_per_draw","mcse_mean","mcse_over_posterior_sd","method"
+"south_korea","beta_0",1,10000,0.00411261489675036,1.6913601288973e-05,10000,1,4.11261489675036e-05,0.01,"coda::spectrum0.ar"
+"south_korea","alpha",1,10000,0.0564900468612887,0.0563531600241375,566.272662087405,0.0566272662087405,0.00237388205318077,0.0420230144083583,"coda::spectrum0.ar"
+"south_korea","tau2",1,10000,0.00315096492278688,8.6264622927525e-05,1150.94457121487,0.115094457121487,9.28787504909088e-05,0.0294762883011602,"coda::spectrum0.ar"

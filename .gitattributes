@@ -1,0 +1,7 @@
+* text=auto
+
+*.gpkg binary
+*.keras binary
+*.npz binary
+*.pdf binary
+*.png binary

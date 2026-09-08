@@ -1,0 +1,59 @@
+﻿display_id,area_id,area_name,atlas_region
+C001,alameda,Alameda,SW
+C002,alpine,Alpine,NE
+C003,amador,Amador,NE
+C004,butte,Butte,NW
+C005,calaveras,Calaveras,NE
+C006,colusa,Colusa,NW
+C007,contra costa,Contra Costa,SW
+C008,del norte,Del Norte,NW
+C009,el dorado,El Dorado,NE
+C010,fresno,Fresno,SE
+C011,glenn,Glenn,NW
+C012,humboldt,Humboldt,NW
+C013,imperial,Imperial,SE
+C014,inyo,Inyo,SE
+C015,kern,Kern,SE
+C016,kings,Kings,SE
+C017,lake,Lake,NW
+C018,lassen,Lassen,NE
+C019,los angeles,Los Angeles,SE
+C020,madera,Madera,SE
+C021,marin,Marin,NW
+C022,mariposa,Mariposa,SE
+C023,mendocino,Mendocino,NW
+C024,merced,Merced,SE
+C025,modoc,Modoc,NE
+C026,mono,Mono,SE
+C027,monterey,Monterey,SW
+C028,napa,Napa,NW
+C029,nevada,Nevada,NW
+C030,orange,Orange,SE
+C031,placer,Placer,NE
+C032,plumas,Plumas,NE
+C033,riverside,Riverside,SE
+C034,sacramento,Sacramento,NW
+C035,san benito,San Benito,SW
+C036,san bernardino,San Bernardino,SE
+C037,san diego,San Diego,SE
+C038,san francisco,San Francisco,SW
+C039,san joaquin,San Joaquin,SW
+C040,san luis obispo,San Luis Obispo,SE
+C041,san mateo,San Mateo,SW
+C042,santa barbara,Santa Barbara,SE
+C043,santa clara,Santa Clara,SW
+C044,santa cruz,Santa Cruz,SW
+C045,shasta,Shasta,NW
+C046,sierra,Sierra,NE
+C047,siskiyou,Siskiyou,NW
+C048,solano,Solano,NW
+C049,sonoma,Sonoma,NW
+C050,stanislaus,Stanislaus,SE
+C051,sutter,Sutter,NW
+C052,tehama,Tehama,NW
+C053,trinity,Trinity,NW
+C054,tulare,Tulare,SE
+C055,tuolumne,Tuolumne,SE
+C056,ventura,Ventura,SE
+C057,yolo,Yolo,NW
+C058,yuba,Yuba,NW

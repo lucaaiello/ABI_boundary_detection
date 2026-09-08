@@ -1,0 +1,76 @@
+{
+  "period": "2015-2019",
+  "full_area_count": 250,
+  "analysis_area_count": 241,
+  "component_sizes": [
+    241,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "analysis_edge_count": 626,
+  "analysis_mean_degree": 5.195020746887967,
+  "primary_application": "lung_cancer_with_current_smoking",
+  "covariates": {
+    "smoking": {
+      "mean_pct": 21.494522821576766,
+      "sd_pct": 2.1336303098877525,
+      "median_standardized_edge_dissimilarity": 0.6983402856132032,
+      "M": 0.9925636467489515,
+      "moran_i": 0.27426150189839626
+    },
+    "deprivation": {
+      "mean_pct": 3.8886639004149375,
+      "sd_pct": 1.5098441976392638,
+      "median_standardized_edge_dissimilarity": 0.4987269555212142,
+      "M": 1.389832999572972,
+      "moran_i": 0.6115597533535113
+    }
+  },
+  "outcomes": {
+    "lung_cancer": {
+      "cause": "Malignant neoplasms of trachea, bronchus and lung (C33-C34)",
+      "observed_total": 87271,
+      "expected_total": 87314.29665511468,
+      "observed_range": [
+        39,
+        1163
+      ],
+      "expected_range": [
+        53.1717446359217,
+        1170.8137914859199
+      ]
+    },
+    "suicide": {
+      "cause": "Intentional self-harm (X60-X84)",
+      "observed_total": 64789,
+      "expected_total": 64899.89370528945,
+      "observed_range": [
+        30,
+        1024
+      ],
+      "expected_range": [
+        30.218377819456894,
+        1053.724515173892
+      ]
+    },
+    "circulatory": {
+      "cause": "Diseases of the circulatory system (I00-I99)",
+      "observed_total": 295911,
+      "expected_total": 295422.269251695,
+      "observed_range": [
+        149,
+        3691
+      ],
+      "expected_range": [
+        193.39098824448695,
+        3868.9347555922695
+      ]
+    }
+  }
+}

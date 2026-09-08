@@ -1,0 +1,2 @@
+"dataset_name","gpkg_path","adjacency_path","N","edge_count","mean_neighbors","n_iter","burnin","thin","n_adapt","seed","z_median_adjacent","M_real","alpha_max","threshold","verbose"
+"south_korea","Data/South_Korea/mortality_data_south_korea.gpkg","Data/South_Korea/adjacency_matrix_south_korea.csv",241,626,5.19502074688797,300000,100000,20,100000,2026082204,0.698340285613203,0.992563632535771,0.992563632535771,0.693147180559945,TRUE
