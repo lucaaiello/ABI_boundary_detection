@@ -53,7 +53,7 @@ To keep the README readable, the output tables below use these path shortcuts.
 | `$ABL_IMG` | `Simulation Experiments/Ablation_experiments/Results/comparison_outputs/Images` |
 | `$ABL_TAB` | `Simulation Experiments/Ablation_experiments/Results/comparison_outputs/Tables` |
 | `$REAL` | `Real Data Analysis` |
-| `$CAR_SETUP` | `Real Data Analysis/setup_and_diagnostics` |
+| `$CAR_SETUP` | `Real Data Analysis/setup_and_diagnostics/CARBayes` |
 | `$DAGAR_SETUP` | `Real Data Analysis/setup_and_diagnostics/DAGARBayes` |
 | `$REAL_CAR` | `Real Data Analysis/results_ABI_vs_CARBayes` |
 | `$REAL_DAGAR` | `Real Data Analysis/results_ABI_vs_DAGARBayes` |

@@ -424,7 +424,7 @@ env_flag <- function(name, default = TRUE) {
 
 project_dir <- get_project_dir()
 data_dir <- file.path(project_dir, "Data")
-results_dir <- file.path(project_dir, "setup_and_diagnostics")
+results_dir <- file.path(project_dir, "setup_and_diagnostics", "CARBayes")
 
 if (!dir.exists(data_dir)) {
   stop("Could not find Data directory under: ", project_dir)
