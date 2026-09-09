@@ -48,13 +48,13 @@ def normalize_visible_legend(path: Path, reference_path: Path | None = None):
         raise RuntimeError(f"Could not isolate the legend in {path}")
 
     if reference_path is None:
-        canvas_height = image.height
+        canvas_height = map_image.height
     else:
         with Image.open(reference_path) as raw_reference:
             reference = raw_reference.convert("RGBA")
         reference_map, _ = split_layout(reference)
         map_image = _resize_to_height(map_image, reference_map.height)
-        canvas_height = reference.height
+        canvas_height = reference_map.height
 
     legend_height = round(LEGEND_HEIGHT_FRACTION * map_image.height)
     legend_image = _resize_to_height(legend_image, legend_height)
