@@ -240,7 +240,7 @@ def draw_training_graphs(axis):
 def draw_network_block(axis):
     rounded_box(axis, (34, 42), 441, 105, TEAL, linewidth=2.0, radius=8, shadow=True)
     axis.text(118, 133, "SET TRANSFORMER", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
-    axis.text(354, 133, "CONDITIONAL FLOW", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
+    axis.text(354, 133, "NORMALIZING FLOW", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
 
     set_nodes = np.array([[59, 72], [59, 96], [59, 120]])
     attention_nodes = np.array([[103, 80], [103, 112]])
