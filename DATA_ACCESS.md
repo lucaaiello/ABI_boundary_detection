@@ -3,6 +3,10 @@
 The repository contains the analysis-ready areal inputs used by the three case
 studies. No individual-level health data are used by the analyses.
 
+The repository's MIT License applies only to original code developed for this
+project. It does not apply to third-party datasets or override their respective
+access, licensing, citation, or redistribution terms.
+
 ## Greater Glasgow
 
 The respiratory-disease data are distributed through the R package

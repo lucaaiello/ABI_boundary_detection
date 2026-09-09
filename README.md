@@ -276,7 +276,7 @@ Supplementary figures:
 | --- | --- | --- |
 | `$REAL_CAR/glasgow` | `glasgow_post_pred_check.png` | Glasgow reconstructed replicated-count diagnostic |
 | `$REAL_CAR/california` | `california_post_pred_check.png` | California reconstructed replicated-count diagnostic |
-| `$REAL_CAR/south_korea` | `south_korea_post_pred_check.png` | Supplement reconstructed replicated-count diagnostic |
+| `$REAL_CAR/south_korea` | `south_korea_post_pred_check.png` | South Korean reconstructed replicated-count diagnostic |
 | `$REAL_CAR/glasgow` | `glasgow_risk_comparison.png` | Glasgow fitted-risk comparison |
 | `$REAL_CAR/california` | `california_risk_comparison.png` | California fitted-risk comparison |
 | `$REAL_CAR/south_korea` | `south_korea_risk_comparison.png` | Supplement fitted-risk comparison panel |
