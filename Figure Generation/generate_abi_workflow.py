@@ -255,9 +255,9 @@ def draw_network_block(axis):
         axis.scatter(points[:, 0], points[:, 1], s=53, facecolor=WHITE, edgecolor=TEAL, linewidth=1.8, zorder=5)
     axis.scatter(summary_node[:, 0], summary_node[:, 1], s=72, facecolor=TEAL_LIGHT, edgecolor=TEAL, linewidth=2.0, zorder=6)
 
-    context_node = (245, 178)
-    arrow(axis, (163, 156), (238, 176), TEAL, linewidth=1.7, mutation_scale=12)
-    axis.text(199, 177, "SUMMARY", color=TEAL, fontsize=7.2, weight="bold", ha="center", va="bottom")
+    context_node = (245, 169)
+    arrow(axis, (163, 156), (238, 168), TEAL, linewidth=1.7, mutation_scale=12)
+    axis.text(199, 172, "SUMMARY", color=TEAL, fontsize=7.2, weight="bold", ha="center", va="bottom")
     axis.scatter([context_node[0]], [context_node[1]], s=60, facecolor=TEAL_LIGHT, edgecolor=TEAL, linewidth=1.8, zorder=6)
 
     base_node = (245, 138)
