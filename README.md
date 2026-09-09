@@ -1,6 +1,6 @@
 ## Reproducing the manuscript and supplementary results
 
-This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Spatial Disease Mapping and Boundary Detection Using Generative AI: An Amortized Bayesian Learning Framework*.
+This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Amortized Bayesian Inference for Boundary Detection on Heterogeneous Spatial Graphs*.
 
 The workflow has three main blocks:
 
@@ -251,7 +251,7 @@ Run:
 | --- | --- |
 | `$REAL/CARBayes_california_glasgow_south_korea.R` | Fits the localized `CARBayes` benchmark for Glasgow, California, and South Korea, and saves posterior and edge diagnostics. |
 | `$REAL/CARBayes_vs_ABI_real_data.ipynb` | Applies the manuscript ABI-DAGAR checkpoint to the empirical datasets and compares ABI-DAGAR with `CARBayes`. |
-| `$REAL/exploratory_analysis.ipynb` | Produces the harmonized descriptive diagnostics, disease/covariate maps, and named-area reference outputs used by the AOAS manuscript and supplement. |
+| `$REAL/exploratory_analysis.ipynb` | Produces the harmonized descriptive diagnostics, disease/covariate maps, and named-area reference outputs used by the manuscript and supplement. |
 
 Input/result folders:
 
@@ -326,7 +326,7 @@ Numerical summary sources:
 | Supplement ABI-DAGAR versus MCMC-DAGAR posterior-summary table | The three manuscript applications' `$REAL_DAGAR/*/parameter_summary_comparison.csv` files and corresponding `$DAGAR_SETUP` inputs |
 | Supplement ABI-DAGAR versus MCMC-DAGAR agreement table | `$REAL_DAGAR/combined_edge_metrics.csv`; the three manuscript applications' `edge_metrics.csv` files |
 
-### AOAS application output index
+### Application output index
 
 The current manuscript uses Greater Glasgow, California, and South Korea. The
 main exploratory inputs are produced by `$REAL/exploratory_analysis.ipynb` in

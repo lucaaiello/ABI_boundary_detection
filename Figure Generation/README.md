@@ -12,7 +12,7 @@ The generators are deterministic and write PNG files directly to
 
 | Generator | Output | Data dependencies |
 |---|---|---|
-| `generate_abi_workflow.py` | `abi_train_validate_deploy_workflow.png` | None; conceptual diagram |
+| `generate_abi_workflow.py` | `abi_train_validate_deploy_workflow.png` | The three empirical GeoPackages and adjacency matrices used for the application graph thumbnails |
 | `generate_boundary_probability_residual_contrast.py` | `boundary_probability_residual_contrast.png` | `results_ABI_vs_CARBayes/*/edge_comparison.csv` and `results_exploratory_analysis/*_harmonized_data.csv` |
 | `generate_deployment_support_training_distribution.py` | `deployment_support_training_distribution.png` | Original training input design, empirical harmonized data, and adjacency matrices |
 
