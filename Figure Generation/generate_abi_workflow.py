@@ -40,8 +40,8 @@ AMBER = "#d78900"
 AMBER_LIGHT = "#fff1c8"
 CORAL = "#d92b18"
 EDGE = "#76909a"
-PAPER = "#fffefd"
 WHITE = "#ffffff"
+PAPER = WHITE
 
 
 @dataclass(frozen=True)
@@ -431,11 +431,16 @@ def draw_reuse(axis):
 
 
 def draw_background(axis):
-    yy, xx = np.mgrid[0:CANVAS_HEIGHT, 0:CANVAS_WIDTH]
-    distance = np.sqrt(((xx - CANVAS_WIDTH / 2) / CANVAS_WIDTH) ** 2 + ((yy - CANVAS_HEIGHT / 2) / CANVAS_HEIGHT) ** 2)
-    shade = np.clip(1.0 - 0.018 * distance, 0.97, 1.0)
-    base = np.asarray(matplotlib.colors.to_rgb(PAPER))
-    axis.imshow(np.clip(shade[..., None] * base, 0, 1), extent=(0, CANVAS_WIDTH, 0, CANVAS_HEIGHT), origin="lower", interpolation="bilinear", zorder=0)
+    axis.add_patch(
+        Rectangle(
+            (0, 0),
+            CANVAS_WIDTH,
+            CANVAS_HEIGHT,
+            facecolor=WHITE,
+            edgecolor="none",
+            zorder=0,
+        )
+    )
 
 
 def render(output_path):
