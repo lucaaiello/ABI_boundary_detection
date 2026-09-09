@@ -407,8 +407,8 @@ def draw_application_graph(axis, spec):
     axis.scatter(coordinates[:, 0], coordinates[:, 1], s=spec.node_size, facecolor=INK, edgecolor=WHITE, linewidth=0.25, zorder=6)
     label_x = 1680
     axis.text(label_x, spec.center[1] + 5, spec.label, color=INK, fontsize=14.5, weight="bold", va="center")
-    offset = {"CALIFORNIA": 155, "GLASGOW": 130, "SOUTH KOREA": 166}[spec.label]
-    axis.text(label_x + offset, spec.center[1] + 5, rf"$N = {spec.n_areas}$", color=INK, fontsize=13.5, va="center")
+    sample_size_x = 1846
+    axis.text(sample_size_x, spec.center[1] + 5, rf"$N = {spec.n_areas}$", color=INK, fontsize=13.5, va="center")
 
 
 def draw_reuse(axis):
