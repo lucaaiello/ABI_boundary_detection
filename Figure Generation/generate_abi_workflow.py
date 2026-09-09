@@ -226,25 +226,25 @@ def draw_training_graphs(axis):
     axis.text(254, 641, r"$N=40,\ldots,300$", ha="center", va="center", color=INK, fontsize=17)
     positions = (
         (88, 570), (195, 570), (303, 570), (410, 570),
-        (95, 445), (250, 445), (405, 445),
-        (112, 320), (315, 320),
+        (95, 420), (250, 420), (405, 420),
+        (112, 270), (315, 270),
     )
     node_counts = (8, 9, 10, 11, 12, 13, 14, 15, 17)
     widths = (84, 91, 93, 94, 112, 118, 112, 145, 142)
     for index, (center, n_nodes, width) in enumerate(zip(positions, node_counts, widths)):
         draw_simulated_graph(axis, center, width, 75, n_nodes, 1800 + index)
     for index in range(6):
-        axis.add_patch(Circle((210 + index * 22, 249), 4.1, facecolor="#d5dcdf" if index == 0 else "#a6b2b8", edgecolor="none", zorder=3))
+        axis.add_patch(Circle((210 + index * 22, 190), 4.1, facecolor="#d5dcdf" if index == 0 else "#a6b2b8", edgecolor="none", zorder=3))
 
 
 def draw_network_block(axis):
-    rounded_box(axis, (34, 100), 441, 119, TEAL, linewidth=2.0, radius=8, shadow=True)
-    axis.text(118, 200, "SET TRANSFORMER", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
-    axis.text(354, 200, "CONDITIONAL FLOW", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
+    rounded_box(axis, (34, 42), 441, 105, TEAL, linewidth=2.0, radius=8, shadow=True)
+    axis.text(118, 133, "SET TRANSFORMER", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
+    axis.text(354, 133, "CONDITIONAL FLOW", color=INK, fontsize=10.5, weight="bold", ha="center", va="center")
 
-    set_nodes = np.array([[59, 130], [59, 154], [59, 178]])
-    attention_nodes = np.array([[103, 138], [103, 170]])
-    summary_node = np.array([[155, 154]])
+    set_nodes = np.array([[59, 72], [59, 96], [59, 120]])
+    attention_nodes = np.array([[103, 80], [103, 112]])
+    summary_node = np.array([[155, 96]])
     for source in set_nodes:
         for target in attention_nodes:
             axis.plot([source[0], target[0]], [source[1], target[1]], color=EDGE, linewidth=0.75, alpha=0.72, zorder=3)
@@ -255,34 +255,34 @@ def draw_network_block(axis):
         axis.scatter(points[:, 0], points[:, 1], s=53, facecolor=WHITE, edgecolor=TEAL, linewidth=1.8, zorder=5)
     axis.scatter(summary_node[:, 0], summary_node[:, 1], s=72, facecolor=TEAL_LIGHT, edgecolor=TEAL, linewidth=2.0, zorder=6)
 
-    context_node = (245, 169)
-    arrow(axis, (163, 156), (238, 168), TEAL, linewidth=1.7, mutation_scale=12)
-    axis.text(199, 172, "SUMMARY", color=TEAL, fontsize=7.2, weight="bold", ha="center", va="bottom")
+    context_node = (245, 111)
+    arrow(axis, (163, 98), (238, 110), TEAL, linewidth=1.7, mutation_scale=12)
+    axis.text(199, 114, "SUMMARY", color=TEAL, fontsize=7.2, weight="bold", ha="center", va="bottom")
     axis.scatter([context_node[0]], [context_node[1]], s=60, facecolor=TEAL_LIGHT, edgecolor=TEAL, linewidth=1.8, zorder=6)
 
-    base_node = (245, 138)
+    base_node = (245, 80)
     axis.scatter([base_node[0]], [base_node[1]], s=49, facecolor=WHITE, edgecolor=INK, linewidth=1.5, zorder=6)
-    axis.text(base_node[0], 113, r"$z_0$", color=INK, fontsize=9.0, ha="center", va="center")
+    axis.text(base_node[0], 55, r"$z_0$", color=INK, fontsize=9.0, ha="center", va="center")
     flow_centers = (286, 326, 366)
     previous_x = base_node[0] + 5
     for index, x in enumerate(flow_centers, start=1):
-        arrow(axis, (previous_x, 138), (x - 13, 138), TEAL, linewidth=1.4, mutation_scale=9, zorder=5)
-        rounded_box(axis, (x - 12, 124), 24, 28, TEAL, facecolor=blend(TEAL_LIGHT, amount=0.35), linewidth=1.2, radius=4, zorder=6)
-        axis.text(x, 138, rf"$f_{index}$", color=INK, fontsize=8.0, ha="center", va="center", zorder=7)
-        axis.plot([x, x], [169, 153], color=TEAL, linewidth=1.1, linestyle=(0, (2, 2)), zorder=4)
+        arrow(axis, (previous_x, 80), (x - 13, 80), TEAL, linewidth=1.4, mutation_scale=9, zorder=5)
+        rounded_box(axis, (x - 12, 66), 24, 28, TEAL, facecolor=blend(TEAL_LIGHT, amount=0.35), linewidth=1.2, radius=4, zorder=6)
+        axis.text(x, 80, rf"$f_{index}$", color=INK, fontsize=8.0, ha="center", va="center", zorder=7)
+        axis.plot([x, x], [111, 95], color=TEAL, linewidth=1.1, linestyle=(0, (2, 2)), zorder=4)
         previous_x = x + 13
-    axis.plot([context_node[0], flow_centers[-1]], [169, 169], color=TEAL, linewidth=1.2, zorder=4)
+    axis.plot([context_node[0], flow_centers[-1]], [111, 111], color=TEAL, linewidth=1.2, zorder=4)
 
-    posterior_node = (423, 138)
-    arrow(axis, (previous_x, 138), (posterior_node[0] - 7, 138), TEAL, linewidth=1.4, mutation_scale=9, zorder=5)
+    posterior_node = (423, 80)
+    arrow(axis, (previous_x, 80), (posterior_node[0] - 7, 80), TEAL, linewidth=1.4, mutation_scale=9, zorder=5)
     axis.scatter([posterior_node[0]], [posterior_node[1]], s=66, facecolor=INK, edgecolor=TEAL, linewidth=1.4, zorder=6)
-    axis.text(posterior_node[0], 113, r"$\theta$", color=INK, fontsize=9.0, ha="center", va="center")
-    axis.plot([423, 475, 511, 511], [138, 138, 138, 427], color=TEAL, linewidth=3.0, solid_capstyle="round", zorder=7)
-    arrow(axis, (511, 427), (598, 427), TEAL, linewidth=3.0, mutation_scale=18)
+    axis.text(posterior_node[0], 55, r"$\theta$", color=INK, fontsize=9.0, ha="center", va="center")
+    axis.plot([423, 475, 511, 511], [80, 80, 80, 353], color=TEAL, linewidth=3.0, solid_capstyle="round", zorder=7)
+    arrow(axis, (511, 353), (598, 353), TEAL, linewidth=3.0, mutation_scale=18)
 
 
 def draw_posterior_operator(axis):
-    center = np.array([710.0, 425.0])
+    center = np.array([710.0, 353.0])
     rng = np.random.default_rng(4021)
     for angle in np.linspace(0, 2 * np.pi, 42, endpoint=False):
         inner = 118 + rng.uniform(-4, 6)
@@ -300,15 +300,15 @@ def draw_posterior_operator(axis):
     ):
         axis.add_patch(Circle(center, radius, facecolor="none", edgecolor=color, linewidth=linewidth, alpha=alpha, linestyle=linestyle, zorder=3))
     nodes = np.array(
-        [[664, 472], [712, 505], [759, 472], [681, 432], [712, 448], [744, 432], [665, 394], [712, 394], [759, 394], [712, 357]]
+        [[664, 400], [712, 433], [759, 400], [681, 360], [712, 376], [744, 360], [665, 322], [712, 322], [759, 322], [712, 285]]
     )
     links = ((0, 1), (1, 2), (0, 3), (2, 5), (3, 4), (4, 5), (3, 6), (4, 7), (5, 8), (6, 7), (7, 8), (7, 9))
     for first, second in links:
         axis.plot(nodes[[first, second], 0], nodes[[first, second], 1], color=INK, linewidth=2.5, zorder=5)
     axis.scatter(nodes[:, 0], nodes[:, 1], s=66, facecolor=blend(TEAL_LIGHT, amount=0.25), edgecolor=TEAL, linewidth=2.2, zorder=6)
-    axis.text(710, 626, "ONE POSTERIOR", ha="center", color=TEAL, fontsize=17.5, weight="bold")
-    axis.text(710, 595, "OPERATOR", ha="center", color=TEAL, fontsize=17.5, weight="bold")
-    arrow(axis, (829, 427), (900, 427), AMBER, linewidth=3.0, mutation_scale=18)
+    axis.text(710, 554, "ONE POSTERIOR", ha="center", color=TEAL, fontsize=17.5, weight="bold")
+    axis.text(710, 523, "OPERATOR", ha="center", color=TEAL, fontsize=17.5, weight="bold")
+    arrow(axis, (829, 353), (900, 353), AMBER, linewidth=3.0, mutation_scale=18)
 
 
 def draw_shield(axis):
@@ -326,10 +326,10 @@ def draw_shield(axis):
 
 def draw_validation(axis):
     axis.text(1048, 681, "FROZEN WEIGHTS", ha="center", color=AMBER, fontsize=17, weight="bold")
-    rounded_box(axis, (901, 151), 294, 513, AMBER, facecolor="none", linewidth=1.7, radius=18, linestyle=(0, (3, 3)), zorder=2)
+    rounded_box(axis, (901, 42), 294, 622, AMBER, facecolor="none", linewidth=1.7, radius=18, linestyle=(0, (3, 3)), zorder=2)
     draw_shield(axis)
     for index, label in enumerate(("CALIBRATION", "BOUNDARY RECOVERY", "REPLICATION", "MCMC-DAGAR")):
-        y = 337 - index * 49
+        y = 320 - index * 78
         rounded_box(axis, (917, y), 268, 48, "#a67824", facecolor=WHITE, linewidth=1.15, radius=4, shadow=index == 0, zorder=5)
         rounded_box(axis, (930, y + 13), 20, 20, AMBER, facecolor=AMBER, linewidth=0.8, radius=3, zorder=6)
         axis.plot([935, 940, 947], [y + 23, y + 18, y + 29], color=WHITE, linewidth=1.7, solid_capstyle="round", zorder=7)
@@ -338,7 +338,7 @@ def draw_validation(axis):
 
 def draw_gate(axis):
     x_left, x_right = 1232, 1350
-    y_bottom, y_top = 368, 508
+    y_bottom, y_top = 295, 435
     axis.plot([x_left, x_left], [y_bottom, y_top], color=INK, linewidth=7, zorder=5)
     axis.plot([x_right, x_right], [y_bottom, y_top], color=INK, linewidth=7, zorder=5)
     for x in (x_left, x_right):
@@ -351,11 +351,11 @@ def draw_gate(axis):
     curve_x = np.linspace(x_left + 4, x_right - 4, 120)
     curve_y = y_top + 15 - 0.0063 * (curve_x - (x_left + x_right) / 2) ** 2
     axis.plot(curve_x, curve_y, color=INK, linewidth=3.2, zorder=5)
-    medallion = Circle((1291, 426), 23, facecolor=INK, edgecolor=AMBER, linewidth=2.5, zorder=8)
+    medallion = Circle((1291, 353), 23, facecolor=INK, edgecolor=AMBER, linewidth=2.5, zorder=8)
     axis.add_patch(medallion)
     add_shadow(medallion, offset=(2, -2), alpha=0.18)
-    axis.plot([1280, 1289, 1304], [426, 415, 440], color=AMBER, linewidth=3.3, solid_capstyle="round", zorder=9)
-    arrow(axis, (1194, 427), (1228, 427), CORAL, linewidth=3.0, mutation_scale=18)
+    axis.plot([1280, 1289, 1304], [353, 342, 367], color=AMBER, linewidth=3.3, solid_capstyle="round", zorder=9)
+    arrow(axis, (1194, 353), (1228, 353), CORAL, linewidth=3.0, mutation_scale=18)
 
 
 def load_application_graph(spec):
@@ -414,20 +414,20 @@ def draw_application_graph(axis, spec):
 def draw_reuse(axis):
     axis.text(1652, 694, "NO RETRAINING", ha="center", color=CORAL, fontsize=17, weight="bold")
     axis.plot([1388, 1388], [272, 586], color=CORAL, linewidth=3.2, solid_capstyle="round", zorder=6)
-    axis.plot([1354, 1388], [427, 427], color=CORAL, linewidth=3.2, zorder=6)
+    axis.plot([1354, 1388], [353, 353], color=CORAL, linewidth=3.2, zorder=6)
     for y in (585, 427, 267):
         arrow(axis, (1388, y), (1453, y), CORAL, linewidth=3.0, mutation_scale=18)
     for spec in APPLICATIONS:
         draw_application_graph(axis, spec)
-    axis.plot([1498, 1498, 1865, 1865], [201, 184, 184, 201], color=CORAL, linewidth=3.0, solid_capstyle="round", zorder=6)
-    arrow(axis, (1655, 184), (1655, 147), CORAL, linewidth=3.0, mutation_scale=18)
-    rounded_box(axis, (1412, 42), 451, 105, CORAL, facecolor=WHITE, linewidth=2.2, radius=8, shadow=True, zorder=4)
-    nodes = np.array([[1440, 94], [1463, 112], [1494, 93], [1460, 68]])
+    axis.plot([1498, 1498, 1922, 1922], [201, 184, 184, 201], color=CORAL, linewidth=3.0, solid_capstyle="round", zorder=6)
+    arrow(axis, (1710, 184), (1710, 147), CORAL, linewidth=3.0, mutation_scale=18)
+    rounded_box(axis, (1485, 42), 451, 105, CORAL, facecolor=WHITE, linewidth=2.2, radius=8, shadow=True, zorder=4)
+    nodes = np.array([[1513, 94], [1536, 112], [1567, 93], [1533, 68]])
     for index, (first, second) in enumerate(((0, 1), (1, 2), (0, 3), (2, 3))):
         axis.plot(nodes[[first, second], 0], nodes[[first, second], 1], color=CORAL if index == 1 else INK, linewidth=2.5, zorder=6)
     axis.scatter(nodes[:, 0], nodes[:, 1], s=50, facecolor=INK, edgecolor=WHITE, linewidth=0.6, zorder=7)
-    axis.text(1565, 106, "JOINT POSTERIOR", color=CORAL, fontsize=17.5, weight="bold", va="center", zorder=7)
-    axis.text(1565, 72, "EDGE PROBABILITIES", color=INK, fontsize=16, va="center", zorder=7)
+    axis.text(1638, 106, "JOINT POSTERIOR", color=CORAL, fontsize=17.5, weight="bold", va="center", zorder=7)
+    axis.text(1638, 72, "EDGE PROBABILITIES", color=INK, fontsize=16, va="center", zorder=7)
 
 
 def draw_background(axis):
