@@ -1,14 +1,14 @@
 ## Reproducing the manuscript and supplementary results
 
-This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Amortized Bayesian Inference for Boundary Detection on Heterogeneous Spatial Graphs*.
+This repository contains the code used to reproduce the results reported in the manuscript and Supplementary Materials for *Amortized Bayesian Disease Mapping and Boundary Detection on Heterogeneous Spatial Graphs*.
 
 The workflow has three main blocks:
 
-1. **Simulation experiments** validating ABI-DAGAR under the proposed Poisson-DAGAR boundary-detection model. These include parameter recovery, posterior calibration, boundary-probability diagnostics, parameter-posterior replicated-data checks, a closely aligned DAGAR MCMC comparison, computation summaries, and the ablation study of summary statistics.
+1. **Simulation experiments** validating ABI-DAGAR under the proposed Poisson-DAGAR boundary-detection model. These include parameter recovery, posterior calibration, boundary-probability diagnostics, parameter-posterior replicated-data checks, a prior- and construction-matched DAGAR MCMC comparison, computation summaries, and the ablation study of summary statistics.
 2. **Real-data analyses** applying the same trained ABI-DAGAR approximation to Greater Glasgow respiratory-disease hospitalizations, California lung-cancer incidence, and South Korean tracheal, bronchial, and lung-cancer mortality, with comparisons against `CARBayes` and a dataset-specific DAGAR MCMC sampler.
 3. **Supplementary diagnostics and benchmark analyses** extending the main validation with additional calibration, replicated-data, ablation, runtime, provenance, and real-data comparator results.
 
-The DAGAR MCMC implementation uses the same likelihood, DAGAR construction, scalar threshold, and fixed identity ordering as the simulator. Its intercept and variance priors differ, as documented in the benchmark code and Supplementary Materials. The replicated-data checks draw a new latent field from its conditional prior for each scalar posterior draw; they are not full latent-field posterior predictive checks.
+The simulation DAGAR MCMC benchmark uses the same likelihood, DAGAR construction, isolate repair, latent-field centering, scalar threshold, fixed identity ordering, and scalar priors as the ABI data-generating process. The separate real-data DAGAR comparison is descriptive and retains the prior specifications documented in its code and the Supplementary Materials. The replicated-data checks draw a new latent field from its conditional prior for each scalar posterior draw; they are not full latent-field posterior predictive checks.
 
 Analysis figures are written next to the block that generated them. Tracked
 manuscript-ready standalone figures and standardized map panels are collected
@@ -49,10 +49,9 @@ To keep the README readable, the output tables below use these path shortcuts.
 | `$SIM` | `Simulation Experiments` |
 | `$SIM_IMG` | `Simulation Experiments/Images` |
 | `$SIM_TAB` | `Simulation Experiments/Tables` |
-| `$MCMC` | `Simulation Experiments/ABI_vs_MCMC` |
-| `$MCMC_BANK` | `Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100` |
-| `$MCMC_CMP` | `Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/comparison_abi_vs_mcmc` |
-| `$MCMC_PLOTS` | `Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/comparison_abi_vs_mcmc/plots` |
+| `$MCMC` | `Simulation Experiments/ABI_vs_matched_MCMC` |
+| `$MCMC_BANK` | `Simulation Experiments/ABI_vs_matched_MCMC/datasets/benchmark_bank_seed123_n100` |
+| `$MCMC_CMP` | `Simulation Experiments/ABI_vs_matched_MCMC/datasets/benchmark_bank_seed123_n100/comparison_abi_vs_matched_mcmc` |
 | `$ABL` | `Simulation Experiments/Ablation_experiments` |
 | `$ABL_IMG` | `Simulation Experiments/Ablation_experiments/Results/comparison_outputs/Images` |
 | `$ABL_TAB` | `Simulation Experiments/Ablation_experiments/Results/comparison_outputs/Tables` |
@@ -120,16 +119,16 @@ Numerical summary sources:
 | Replicated-data diagnostic table | `$SIM_TAB/predictive_check_summary.csv`; `$SIM_TAB/predictive_check_detail.csv` |
 | Simulation computation table | `$SIM_TAB/computation_summary.csv`; `$SIM_TAB/hardware_summary.csv`; `$TRAIN/training_history.csv` |
 
-### 3. Run the simulation benchmark against MCMC-DAGAR
+### 3. Run the prior- and construction-matched MCMC-DAGAR benchmark
 
 Run:
 
 | File | Role |
 | --- | --- |
-| `$MCMC/export_benchmark_datasets.py` | Exports the fixed benchmark bank of simulated datasets. |
+| `$MCMC/prepare_benchmark_bank.py` | Builds the ignored R-readable inputs from the versioned fixed benchmark bank. |
 | `$MCMC/run_abi_benchmark.ipynb` | Runs ABI-DAGAR on the benchmark datasets. |
-| `$MCMC/run_mcmc_benchmark.R` | Runs the closely aligned DAGAR MCMC comparator on the same datasets. |
-| `$MCMC/compare_abi_vs_mcmc.ipynb` | Produces the ABI-DAGAR versus MCMC-DAGAR comparison tables and plots. |
+| `$MCMC/run_matched_mcmc_benchmark.R` | Runs the prior- and construction-matched DAGAR MCMC comparator on the same datasets. |
+| `$MCMC/compare_abi_vs_matched_mcmc.ipynb` | Produces the error decomposition, posterior-agreement, boundary-agreement, precision, and runtime outputs. |
 
 Key input/output folders:
 
@@ -137,33 +136,32 @@ Key input/output folders:
 | --- | --- |
 | `$MCMC_BANK/datasets` | Fixed simulated datasets used by both methods. |
 | `$MCMC_BANK/abi_results_all100` | ABI-DAGAR posterior summaries and edge probabilities. |
-| `$MCMC_BANK/mcmc_results_all100` | MCMC-DAGAR posterior summaries and edge probabilities. |
-| `$MCMC_CMP` | Comparison CSV summaries. |
-| `$MCMC_PLOTS` | Comparison figures. |
+| `$MCMC_BANK/matched_mcmc_results_all100` | Matched MCMC-DAGAR posterior summaries, precision diagnostics, and edge probabilities. |
+| `$MCMC_CMP` | Comparison CSV summaries and manuscript figures. |
 
 Core supplementary benchmark figures:
 
 | Folder | File | Used in |
 | --- | --- | --- |
-| `$MCMC_PLOTS` | `parameter_recovery_bars.png` | Supplementary recovery comparison |
-| `$MCMC_PLOTS` | `parameter_recovery_truth_scatter.png` | Supplementary truth-comparison plot |
-| `$MCMC_PLOTS` | `parameter_recovery_agreement_scatter.png` | Supplementary method-agreement plot |
-| `$MCMC_PLOTS` | `parameter_bias_interval_boxplots.png` | Supplementary bias/interval plot |
+| `$MCMC_CMP` | `posterior_mean_error_decomposition.png` | Supplementary recovery-error decomposition |
+| `$MCMC_CMP` | `posterior_distribution_agreement.png` | Supplementary marginal posterior agreement |
+| `$MCMC_CMP` | `edge_probability_agreement.png` | Supplementary edge-probability agreement |
 
 Additional supplementary benchmark figures:
 
 | Folder | File | Used in |
 | --- | --- | --- |
-| `$MCMC_PLOTS` | `boundary_metric_bars.png` | Boundary-metric comparison |
-| `$MCMC_PLOTS` | `runtime_comparison.png` | Runtime comparison |
+| `$MCMC_CMP` | `parameter_recovery_comparison.png` | Additional parameter-recovery comparison |
 
 Numerical summary sources:
 
 | Result | Source files |
 | --- | --- |
-| Parameter-level ABI-DAGAR versus MCMC-DAGAR comparison | `$MCMC_CMP/parameter_method_summary.csv`; `$MCMC_CMP/parameter_agreement_summary.csv`; `$MCMC_CMP/parameter_pairwise_by_dataset.csv` |
-| Boundary-probability and decision-rule comparison | `$MCMC_CMP/edge_metric_method_summary.csv`; `$MCMC_CMP/edge_agreement_summary.csv`; `$MCMC_CMP/edge_agreement_by_dataset.csv` |
-| Runtime and break-even summaries | `$MCMC_CMP/runtime_summary.csv`; `$MCMC_CMP/runtime_comparison_by_dataset.csv`; `$MCMC_CMP/break_even_summary.csv`; `$MCMC_CMP/break_even_scenarios.csv` |
+| Main recovery-error decomposition | `$MCMC_CMP/error_decomposition_summary.csv`; `$MCMC_CMP/error_decomposition_by_dataset.csv` |
+| Parameter recovery and posterior agreement | `$MCMC_CMP/parameter_method_summary.csv`; `$MCMC_CMP/parameter_agreement_summary.csv`; `$MCMC_CMP/parameter_pairwise_by_dataset.csv`; `$MCMC_CMP/posterior_marginal_distance_summary.csv` |
+| Boundary-probability agreement | `$MCMC_CMP/edge_agreement_summary.csv`; `$MCMC_CMP/edge_agreement_by_dataset.csv`; `$MCMC_CMP/edge_probability_pairs.csv` |
+| MCMC precision and acceptance diagnostics | `$MCMC_CMP/mcmc_chain_diagnostics.csv`; `$MCMC_CMP/mcmc_acceptance.csv` |
+| Runtime summaries | `$MCMC_CMP/runtime_summary.csv`; `$MCMC_CMP/runtime_by_dataset.csv` |
 
 ### 4. Run the ablation study of summary statistics
 
@@ -388,7 +386,7 @@ From the repository root, useful searches are:
 
 ```bash
 rg --files | rg "poisson_dagar_recovery.png|parameter_recovery_summary.csv"
-rg --files | rg "boundary_metric_bars.png|edge_metric_method_summary.csv"
+rg --files | rg "posterior_mean_error_decomposition.png|error_decomposition_summary.csv"
 rg --files | rg "glasgow_boundary_agreement|parameter_summary_comparison.csv"
 ```
 

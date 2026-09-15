@@ -1,0 +1,9 @@
+{
+  "source_bank": "Simulation Experiments/ABI_vs_matched_MCMC/datasets/benchmark_bank_seed123_n100",
+  "bank_name": "benchmark_bank_seed123_n100",
+  "num_datasets": 100,
+  "dataset_dir": "datasets",
+  "r_input_dir": "r_inputs",
+  "manifest_file": "benchmark_manifest.csv",
+  "purpose": "prior- and construction-matched ABI versus MCMC comparison"
+}

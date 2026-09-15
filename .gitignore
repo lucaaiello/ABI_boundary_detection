@@ -26,8 +26,9 @@ Real Data Analysis/Data/South_Korea/raw/*
 # Regenerable simulation and ablation caches
 Simulation Experiments/Ablation_experiments/Results/shared_data/*
 !Simulation Experiments/Ablation_experiments/Results/shared_data/README.md
-Simulation Experiments/ABI_vs_MCMC/datasets/benchmark_bank_seed123_n100/r_inputs/
-Simulation Experiments/ABI_vs_MCMC/**/_posterior_draws.csv
+
+# Superseded by the prior- and construction-matched MCMC benchmark
+Simulation Experiments/ABI_vs_MCMC/
 
 # Large intermediate sampler objects
 *.rds

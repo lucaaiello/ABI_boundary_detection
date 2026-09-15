@@ -1,0 +1,2 @@
+datasets/*/r_inputs/
+datasets/*/*results*/per_dataset/*/*_posterior_draws.csv.gz
