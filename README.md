@@ -128,7 +128,7 @@ Run:
 | `$MCMC/prepare_benchmark_bank.py` | Builds the ignored R-readable inputs from the versioned fixed benchmark bank. |
 | `$MCMC/run_abi_benchmark.ipynb` | Runs ABI-DAGAR on the benchmark datasets. |
 | `$MCMC/run_matched_mcmc_benchmark.R` | Runs the prior- and construction-matched DAGAR MCMC comparator on the same datasets. |
-| `$MCMC/compare_abi_vs_matched_mcmc.ipynb` | Produces the error decomposition, posterior-agreement, boundary-agreement, precision, and runtime outputs. |
+| `$MCMC/compare_abi_vs_matched_mcmc.ipynb` | Produces the error decomposition, parameter-recovery, posterior-agreement, truth-based boundary-recovery, precision, and runtime outputs. |
 
 Key input/output folders:
 
@@ -144,14 +144,17 @@ Core supplementary benchmark figures:
 | Folder | File | Used in |
 | --- | --- | --- |
 | `$MCMC_CMP` | `posterior_mean_error_decomposition.png` | Supplementary recovery-error decomposition |
+| `$MCMC_CMP` | `parameter_recovery_bars.png` | Supplementary aggregate parameter recovery and interval coverage |
+| `$MCMC_CMP` | `parameter_recovery_truth_scatter.png` | Supplementary parameter recovery against generating values |
+| `$MCMC_CMP` | `parameter_recovery_agreement_scatter.png` | Supplementary dataset-level ABI--MCMC parameter agreement |
+| `$MCMC_CMP` | `parameter_bias_interval_boxplots.png` | Supplementary posterior-mean error and interval-width distributions |
 | `$MCMC_CMP` | `posterior_distribution_agreement.png` | Supplementary marginal posterior agreement |
 | `$MCMC_CMP` | `edge_probability_agreement.png` | Supplementary edge-probability agreement |
+| `$MCMC_CMP` | `boundary_metric_bars.png` | Supplementary truth-based boundary recovery |
+| `$MCMC_CMP` | `runtime_comparison.png` | Dataset-level runtime comparison and speedup distribution |
 
-Additional supplementary benchmark figures:
-
-| Folder | File | Used in |
-| --- | --- | --- |
-| `$MCMC_CMP` | `parameter_recovery_comparison.png` | Additional parameter-recovery comparison |
+The comparison notebook also writes `parameter_recovery_comparison.png` as a
+compatibility alias of `parameter_recovery_bars.png`.
 
 Numerical summary sources:
 
@@ -160,6 +163,7 @@ Numerical summary sources:
 | Main recovery-error decomposition | `$MCMC_CMP/error_decomposition_summary.csv`; `$MCMC_CMP/error_decomposition_by_dataset.csv` |
 | Parameter recovery and posterior agreement | `$MCMC_CMP/parameter_method_summary.csv`; `$MCMC_CMP/parameter_agreement_summary.csv`; `$MCMC_CMP/parameter_pairwise_by_dataset.csv`; `$MCMC_CMP/posterior_marginal_distance_summary.csv` |
 | Boundary-probability agreement | `$MCMC_CMP/edge_agreement_summary.csv`; `$MCMC_CMP/edge_agreement_by_dataset.csv`; `$MCMC_CMP/edge_probability_pairs.csv` |
+| Truth-based boundary recovery | `$MCMC_CMP/edge_metric_method_summary.csv`; `$MCMC_CMP/edge_metrics_by_dataset.csv` |
 | MCMC precision and acceptance diagnostics | `$MCMC_CMP/mcmc_chain_diagnostics.csv`; `$MCMC_CMP/mcmc_acceptance.csv` |
 | Runtime summaries | `$MCMC_CMP/runtime_summary.csv`; `$MCMC_CMP/runtime_by_dataset.csv` |
 

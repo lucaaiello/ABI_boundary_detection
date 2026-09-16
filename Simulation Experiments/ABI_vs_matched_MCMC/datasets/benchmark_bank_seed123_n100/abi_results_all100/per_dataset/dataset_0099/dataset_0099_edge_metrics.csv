@@ -1,2 +1,2 @@
 dataset_id,edge_count,true_boundary_count,posterior_boundary_count_mpm,auroc,average_precision,brier,sensitivity_mpm,specificity_mpm,boundary_count_mean_draws,boundary_count_lower_95,boundary_count_upper_95,boundary_count_truth_in_95
-dataset_0099,696,2,49,1.0,1.0,0.04718246590042101,1.0,0.9322766570605188,82.8831,0.0,313.0,1
+dataset_0099,696,2,49,1.0,1.0,0.04660983383655548,1.0,0.9322766570605188,81.2285,0.0,302.0,1

@@ -1,2 +1,2 @@
-"dataset_id","edge_count","true_boundary_count","posterior_boundary_count_mpm","auroc","average_precision","brier","sensitivity_mpm","specificity_mpm","boundary_count_mean_draws","boundary_count_lower_95","boundary_count_upper_95","boundary_count_truth_in_95"
-"dataset_0047",353,20,14,1,1,0.0125752415864023,0.7,1,13.8134,0,39,1
+dataset_id,edge_count,true_boundary_count,posterior_boundary_count_mpm,auroc,average_precision,brier,sensitivity_mpm,specificity_mpm,boundary_count_mean_draws,boundary_count_lower_95,boundary_count_upper_95,boundary_count_truth_in_95
+dataset_0047,353,19,13,1.0,1.0,0.012353075668215752,0.6842105263157895,1.0,13.0642,0.0,38.0,1

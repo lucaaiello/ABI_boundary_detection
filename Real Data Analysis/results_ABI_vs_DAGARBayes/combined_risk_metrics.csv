@@ -9,8 +9,8 @@ mae,0.1481643430475312,california
 rmse,0.2311799346765053,california
 abi_on_dagarbayes_slope,1.753327749733595,california
 abi_on_dagarbayes_intercept,-0.8005117465319646,california
-correlation,0.8842981725695378,south_korea
-mae,0.1417141398364828,south_korea
-rmse,0.1837069216585472,south_korea
-abi_on_dagarbayes_slope,2.34400805943918,south_korea
-abi_on_dagarbayes_intercept,-1.340867682306799,south_korea
+correlation,0.8809644216471786,south_korea
+mae,0.14514789549528925,south_korea
+rmse,0.18755048639766259,south_korea
+abi_on_dagarbayes_slope,2.365592657871873,south_korea
+abi_on_dagarbayes_intercept,-1.3622118284669227,south_korea

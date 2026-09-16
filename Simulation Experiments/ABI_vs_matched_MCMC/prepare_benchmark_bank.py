@@ -41,7 +41,8 @@ def write_r_bundle(path: Path, dataset: dict[str, np.ndarray]) -> None:
     edge_i = np.asarray(dataset["edge_i"], dtype=np.int64).reshape(-1)
     edge_j = np.asarray(dataset["edge_j"], dtype=np.int64).reshape(-1)
     edge_z = np.asarray(dataset["edge_z"], dtype=float).reshape(-1)
-    edge_truth = np.asarray(dataset["edge_boundary_true"], dtype=np.int64).reshape(-1)
+    filtered = np.asarray(dataset["A_filtered"])
+    edge_truth = (filtered[edge_i, edge_j] < 0.5).astype(np.int64)
     with (path / "edge_table.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.writer(handle)
         writer.writerow(

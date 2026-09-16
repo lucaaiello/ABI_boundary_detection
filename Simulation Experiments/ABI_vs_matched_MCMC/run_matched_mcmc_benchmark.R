@@ -226,13 +226,55 @@ compute_average_precision <- function(probability, truth) {
 }
 
 
-compute_boundary_probabilities <- function(eta_draws, edge_z, threshold) {
-  draw_matrix <- outer(
+repair_isolates_deterministic <- function(filtered, adjacency, dissimilarity) {
+  degree <- rowSums(filtered)
+  for (node in seq_len(nrow(filtered))) {
+    if (degree[[node]] != 0L) {
+      next
+    }
+    neighbors <- which(adjacency[node, ] > 0.5)
+    if (length(neighbors) == 0L) {
+      next
+    }
+    neighbor <- neighbors[[which.min(dissimilarity[node, neighbors])]]
+    if (filtered[node, neighbor] == 0) {
+      filtered[node, neighbor] <- 1
+      filtered[neighbor, node] <- 1
+      degree[[node]] <- degree[[node]] + 1L
+      degree[[neighbor]] <- degree[[neighbor]] + 1L
+    }
+  }
+  filtered
+}
+
+
+compute_effective_boundaries <- function(
+    eta_draws, adjacency, dissimilarity, edge_i, edge_j, threshold
+) {
+  edge_z <- dissimilarity[cbind(edge_i, edge_j)]
+  transitions <- threshold / edge_z
+  states <- vapply(
     eta_draws,
-    edge_z,
-    FUN = function(eta, dissimilarity) as.numeric(dissimilarity * eta > threshold)
+    function(eta) sum(transitions < eta),
+    integer(1)
   )
-  colMeans(draw_matrix)
+  unique_states <- unique(states)
+  state_boundaries <- matrix(
+    FALSE,
+    nrow = length(unique_states),
+    ncol = length(edge_i)
+  )
+  for (state_position in seq_along(unique_states)) {
+    representative <- eta_draws[[which(states == unique_states[[state_position]])[[1L]]]]
+    filtered <- adjacency * (dissimilarity * representative <= threshold)
+    filtered <- repair_isolates_deterministic(filtered, adjacency, dissimilarity)
+    state_boundaries[state_position, ] <- filtered[cbind(edge_i, edge_j)] < 0.5
+  }
+  boundary_draws <- state_boundaries[match(states, unique_states), , drop = FALSE]
+  list(
+    probability = colMeans(boundary_draws),
+    count_draws = rowSums(boundary_draws)
+  )
 }
 
 
@@ -429,14 +471,18 @@ for (row_index in seq_len(nrow(manifest))) {
     stringsAsFactors = FALSE
   )
 
-  boundary_probability <- compute_boundary_probabilities(eta_draws, edge_table$edge_z, threshold)
+  effective_boundaries <- compute_effective_boundaries(
+    eta_draws,
+    adjacency,
+    dissimilarity,
+    as.integer(edge_table$node_i_1based),
+    as.integer(edge_table$node_j_1based),
+    threshold
+  )
+  boundary_probability <- effective_boundaries$probability
   boundary_median <- as.integer(boundary_probability > 0.5)
   boundary_truth <- as.integer(edge_table$boundary_true)
-  boundary_count_draws <- vapply(
-    eta_draws,
-    function(eta) sum(edge_table$edge_z * eta > threshold),
-    numeric(1)
-  )
+  boundary_count_draws <- effective_boundaries$count_draws
   boundary_count_interval <- as.numeric(quantile(boundary_count_draws, c(0.025, 0.975)))
   edge_probabilities <- edge_table
   edge_probabilities$dataset_id <- dataset_id

@@ -9,6 +9,8 @@ from typing import Iterable
 import numpy as np
 import pandas as pd
 
+from effective_boundaries import effective_boundary_draws, effective_boundary_truth
+
 
 os.environ.setdefault("KERAS_BACKEND", "tensorflow")
 LOG2 = float(np.log(2.0))
@@ -204,7 +206,9 @@ def run_abi_benchmark(
         edge_i = np.asarray(dataset["edge_i"], dtype=np.int32).reshape(-1)
         edge_j = np.asarray(dataset["edge_j"], dtype=np.int32).reshape(-1)
         edge_z = np.asarray(dataset["edge_z"], dtype=np.float32).reshape(-1)
-        boundary_truth = np.asarray(dataset["edge_boundary_true"], dtype=np.int32).reshape(-1)
+        boundary_truth = effective_boundary_truth(
+            dataset["A_filtered"], edge_i, edge_j
+        )
 
         if not quiet:
             print(
@@ -239,7 +243,9 @@ def run_abi_benchmark(
             ignore_index=True,
         )
 
-        boundary_draws = eta[:, None] * edge_z[None, :] > LOG2
+        boundary_draws = effective_boundary_draws(
+            eta, dataset["A"], dataset["Z"], edge_i, edge_j, threshold=LOG2
+        )
         boundary_probability = boundary_draws.mean(axis=0).astype(np.float32)
         boundary_median = (boundary_probability > 0.5).astype(np.int32)
         boundary_count_draws = boundary_draws.sum(axis=1)

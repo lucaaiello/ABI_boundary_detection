@@ -63,3 +63,10 @@ Generated data and results are placed below
 include the summaries and figures used in the manuscript. Regenerable R input
 bundles and gzip-compressed posterior draws are intentionally excluded from
 version control.
+
+The comparison output includes parameter-recovery, posterior-agreement,
+truth-based boundary-recovery, runtime, and recovery-error-decomposition
+tables. Supplementary figures include `parameter_recovery_bars.png`,
+`parameter_bias_interval_boxplots.png`, and `runtime_comparison.png`. The
+notebook also writes `parameter_recovery_comparison.png` as a compatibility
+alias of `parameter_recovery_bars.png`.

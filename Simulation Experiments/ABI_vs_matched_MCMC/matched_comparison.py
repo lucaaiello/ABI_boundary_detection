@@ -5,6 +5,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib.patches import Patch
 from scipy.stats import ks_2samp, wasserstein_distance
 
 
@@ -63,6 +64,48 @@ def summarize_methods(parameters: pd.DataFrame) -> pd.DataFrame:
             mean_interval_width=("interval_width", "mean"),
         )
     )
+
+
+def load_boundary_metric_summaries(
+    abi_results_dir: Path,
+    mcmc_results_dir: Path,
+    dataset_ids: list[str],
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    frames: list[pd.DataFrame] = []
+    for results_dir, method in (
+        (abi_results_dir, "ABI"),
+        (mcmc_results_dir, "Matched MCMC"),
+    ):
+        frame = pd.read_csv(require_file(results_dir / "combined_edge_metrics.csv"))
+        frame = frame.loc[frame["dataset_id"].isin(dataset_ids)].copy()
+        frame["method"] = method
+        frames.append(frame)
+
+    by_dataset = pd.concat(frames, ignore_index=True)
+    metrics = [
+        "auroc",
+        "average_precision",
+        "brier",
+        "sensitivity_mpm",
+        "specificity_mpm",
+        "posterior_boundary_count_mpm",
+        "true_boundary_count",
+        "boundary_count_mean_draws",
+        "boundary_count_truth_in_95",
+    ]
+    summary_rows: list[dict[str, float | int | str]] = []
+    for method, group in by_dataset.groupby("method", sort=False):
+        row: dict[str, float | int | str] = {
+            "method": method,
+            "n_datasets": int(group["dataset_id"].nunique()),
+        }
+        for metric in metrics:
+            values = group[metric].dropna()
+            row[f"{metric}_n"] = int(len(values))
+            row[f"{metric}_mean"] = float(values.mean()) if len(values) else np.nan
+            row[f"{metric}_median"] = float(values.median()) if len(values) else np.nan
+        summary_rows.append(row)
+    return by_dataset, pd.DataFrame(summary_rows)
 
 
 def pair_parameter_summaries(abi: pd.DataFrame, mcmc: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -230,7 +273,9 @@ def build_error_decomposition(
     diagnostics: pd.DataFrame,
     abi_runtime: pd.DataFrame,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
-    precision = diagnostics[["dataset_id", "parameter", "mcse_mean"]]
+    precision = diagnostics[
+        ["dataset_id", "parameter", "effective_sample_size", "mcse_mean"]
+    ]
     abi_draw_counts = abi_runtime[["dataset_id", "n_saved_draws"]].rename(
         columns={"n_saved_draws": "n_abi_draws"}
     )
@@ -339,6 +384,9 @@ def run_comparison(
         abi_results_dir, mcmc_results_dir, common_ids
     )
     edge_pairs, edge_agreement = load_edge_pairs(abi_results_dir, mcmc_results_dir, common_ids)
+    edge_metrics, edge_metric_summary = load_boundary_metric_summaries(
+        abi_results_dir, mcmc_results_dir, common_ids
+    )
 
     edge_agreement_summary = pd.DataFrame(
         [
@@ -376,6 +424,42 @@ def run_comparison(
     decomposition_by_dataset, decomposition_summary = build_error_decomposition(
         parameter_pairs, diagnostics, abi_runtime
     )
+    ess_sensitivity_rows: list[dict[str, float | int | str]] = []
+    for ess_threshold in (0, 20, 50, 100):
+        selected = decomposition_by_dataset.loc[
+            decomposition_by_dataset["effective_sample_size"] >= ess_threshold
+        ]
+        for parameter in JOINT_PARAMETERS:
+            group = selected.loc[selected["parameter"] == parameter]
+            if group.empty:
+                continue
+            ess_sensitivity_rows.append(
+                {
+                    "ess_threshold": ess_threshold,
+                    "parameter": parameter,
+                    "n_parameter_datasets": int(len(group)),
+                    "abi_total_mse_mc_corrected": float(
+                        (group["abi_squared_error"] - group["abi_mc_variance"]).mean()
+                    ),
+                    "mcmc_target_mse_mc_corrected": float(
+                        (group["mcmc_squared_error"] - group["mcmc_mc_variance"]).mean()
+                    ),
+                    "approximation_mse_mc_corrected": float(
+                        (
+                            group["approximation_squared_error"]
+                            - group["abi_mc_variance"]
+                            - group["mcmc_mc_variance"]
+                        ).mean()
+                    ),
+                    "interaction_mc_corrected": float(
+                        (group["interaction"] + 2.0 * group["mcmc_mc_variance"]).mean()
+                    ),
+                    "posterior_mean_correlation": float(
+                        group["posterior_mean_abi"].corr(group["posterior_mean_mcmc"])
+                    ),
+                }
+            )
+    ess_sensitivity = pd.DataFrame(ess_sensitivity_rows)
 
     tables = {
         "parameter_method_summary": method_summary,
@@ -387,12 +471,15 @@ def run_comparison(
         "edge_probability_pairs": edge_pairs,
         "edge_agreement_by_dataset": edge_agreement,
         "edge_agreement_summary": edge_agreement_summary,
+        "edge_metrics_by_dataset": edge_metrics,
+        "edge_metric_method_summary": edge_metric_summary,
         "runtime_by_dataset": runtime,
         "runtime_summary": runtime_summary,
         "mcmc_chain_diagnostics": diagnostics,
         "mcmc_acceptance": acceptance,
         "error_decomposition_by_dataset": decomposition_by_dataset,
         "error_decomposition_summary": decomposition_summary,
+        "error_decomposition_ess_sensitivity": ess_sensitivity,
     }
     for name, table in tables.items():
         table.to_csv(output_dir / f"{name}.csv", index=False)
@@ -407,7 +494,9 @@ def _style_axis(axis, grid_axis: str = "y") -> None:
 
 def plot_parameter_summary(tables: dict[str, pd.DataFrame], output_dir: Path):
     summary = tables["parameter_method_summary"].copy()
-    parameters = [parameter for parameter in PARAMETERS if parameter in set(summary["parameter"])]
+    parameters = [
+        parameter for parameter in JOINT_PARAMETERS if parameter in set(summary["parameter"])
+    ]
     x = np.arange(len(parameters))
     width = 0.36
     fig, axes = plt.subplots(1, 2, figsize=(12, 4.6), facecolor="white")
@@ -428,7 +517,231 @@ def plot_parameter_summary(tables: dict[str, pd.DataFrame], output_dir: Path):
         _style_axis(axis)
     axes[0].legend(frameon=False)
     fig.tight_layout()
-    path = Path(output_dir) / "parameter_recovery_comparison.png"
+    path = Path(output_dir) / "parameter_recovery_bars.png"
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    fig.savefig(
+        Path(output_dir) / "parameter_recovery_comparison.png",
+        dpi=180,
+        bbox_inches="tight",
+    )
+    return fig
+
+
+def _joint_parameter_pairs(tables: dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, list[str]]:
+    pairs = tables["parameter_pairwise_by_dataset"]
+    parameters = [
+        parameter for parameter in JOINT_PARAMETERS if parameter in set(pairs["parameter"])
+    ]
+    return pairs, parameters
+
+
+def _equalize_xy_limits(axis) -> None:
+    lower = min(axis.get_xlim()[0], axis.get_ylim()[0])
+    upper = max(axis.get_xlim()[1], axis.get_ylim()[1])
+    padding = 0.03 * (upper - lower) if upper > lower else 0.1
+    axis.set_xlim(lower - padding, upper + padding)
+    axis.set_ylim(lower - padding, upper + padding)
+    axis.plot(
+        [lower - padding, upper + padding],
+        [lower - padding, upper + padding],
+        color=REFERENCE_COLOR,
+        linestyle="--",
+        linewidth=1.0,
+        zorder=1,
+    )
+
+
+def plot_parameter_truth_scatter(tables: dict[str, pd.DataFrame], output_dir: Path):
+    pairs, parameters = _joint_parameter_pairs(tables)
+    fig, axes = plt.subplots(
+        1, len(parameters), figsize=(4.4 * len(parameters), 4.8), facecolor="white"
+    )
+    axes = np.atleast_1d(axes)
+    for index, (axis, parameter) in enumerate(zip(axes, parameters)):
+        group = pairs.loc[pairs["parameter"] == parameter]
+        truth = group["truth_abi"].to_numpy(dtype=float)
+        for method, color, suffix in (
+            ("ABI", ABI_COLOR, "abi"),
+            ("Matched MCMC", MCMC_COLOR, "mcmc"),
+        ):
+            means = group[f"posterior_mean_{suffix}"].to_numpy(dtype=float)
+            lower = group[f"lower_95_{suffix}"].to_numpy(dtype=float)
+            upper = group[f"upper_95_{suffix}"].to_numpy(dtype=float)
+            axis.errorbar(
+                truth,
+                means,
+                yerr=np.vstack((np.maximum(means - lower, 0.0), np.maximum(upper - means, 0.0))),
+                fmt="o",
+                markersize=4.2,
+                color=color,
+                ecolor=color,
+                elinewidth=0.65,
+                alpha=0.48,
+                label=method,
+                zorder=2,
+            )
+        _equalize_xy_limits(axis)
+        axis.set_title(PARAMETER_LABELS[parameter])
+        axis.set_xlabel("Generating value")
+        if index == 0:
+            axis.set_ylabel("Posterior mean (95% interval)")
+            axis.legend(frameon=False)
+        _style_axis(axis, grid_axis="both")
+    fig.tight_layout()
+    path = Path(output_dir) / "parameter_recovery_truth_scatter.png"
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    return fig
+
+
+def plot_parameter_agreement_scatter(tables: dict[str, pd.DataFrame], output_dir: Path):
+    pairs, parameters = _joint_parameter_pairs(tables)
+    fig, axes = plt.subplots(
+        1, len(parameters), figsize=(4.4 * len(parameters), 4.8), facecolor="white"
+    )
+    axes = np.atleast_1d(axes)
+    for index, (axis, parameter) in enumerate(zip(axes, parameters)):
+        group = pairs.loc[pairs["parameter"] == parameter]
+        abi_mean = group["posterior_mean_abi"].to_numpy(dtype=float)
+        mcmc_mean = group["posterior_mean_mcmc"].to_numpy(dtype=float)
+        axis.errorbar(
+            mcmc_mean,
+            abi_mean,
+            xerr=np.vstack(
+                (
+                    np.maximum(mcmc_mean - group["lower_95_mcmc"].to_numpy(dtype=float), 0.0),
+                    np.maximum(group["upper_95_mcmc"].to_numpy(dtype=float) - mcmc_mean, 0.0),
+                )
+            ),
+            yerr=np.vstack(
+                (
+                    np.maximum(abi_mean - group["lower_95_abi"].to_numpy(dtype=float), 0.0),
+                    np.maximum(group["upper_95_abi"].to_numpy(dtype=float) - abi_mean, 0.0),
+                )
+            ),
+            fmt="o",
+            markersize=4.4,
+            color=INTERACTION_COLOR,
+            ecolor=INTERACTION_COLOR,
+            elinewidth=0.65,
+            alpha=0.45,
+            zorder=2,
+        )
+        _equalize_xy_limits(axis)
+        axis.set_title(PARAMETER_LABELS[parameter])
+        axis.set_xlabel("Matched MCMC posterior mean")
+        if index == 0:
+            axis.set_ylabel("ABI posterior mean (95% intervals)")
+        _style_axis(axis, grid_axis="both")
+    fig.tight_layout()
+    path = Path(output_dir) / "parameter_recovery_agreement_scatter.png"
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    return fig
+
+
+def _add_grouped_boxplots(axis, pairs: pd.DataFrame, parameters: list[str], value: str) -> None:
+    positions = np.arange(len(parameters), dtype=float)
+    for offset, (method, color, suffix) in enumerate(
+        (("ABI", ABI_COLOR, "abi"), ("Matched MCMC", MCMC_COLOR, "mcmc"))
+    ):
+        shift = (offset - 0.5) * 0.38
+        data: list[np.ndarray] = []
+        for parameter in parameters:
+            group = pairs.loc[pairs["parameter"] == parameter]
+            if value == "bias":
+                values = group[f"posterior_mean_{suffix}"] - group[f"truth_{suffix}"]
+            else:
+                values = group[f"upper_95_{suffix}"] - group[f"lower_95_{suffix}"]
+            data.append(values.dropna().to_numpy(dtype=float))
+        boxplot = axis.boxplot(
+            data,
+            positions=positions + shift,
+            widths=0.30,
+            patch_artist=True,
+            showfliers=False,
+        )
+        for box in boxplot["boxes"]:
+            box.set(facecolor=color, alpha=0.72)
+        for median in boxplot["medians"]:
+            median.set(color=REFERENCE_COLOR)
+    axis.set_xticks(positions, [PARAMETER_LABELS[p] for p in parameters])
+
+
+def plot_parameter_bias_interval_boxplots(
+    tables: dict[str, pd.DataFrame], output_dir: Path
+):
+    pairs, parameters = _joint_parameter_pairs(tables)
+    fig, axes = plt.subplots(1, 2, figsize=(14, 4.8), facecolor="white")
+    _add_grouped_boxplots(axes[0], pairs, parameters, "bias")
+    axes[0].axhline(0.0, color=REFERENCE_COLOR, linestyle="--", linewidth=1.0)
+    axes[0].set_ylabel("Posterior-mean error")
+    _add_grouped_boxplots(axes[1], pairs, parameters, "width")
+    axes[1].set_ylabel("95% interval width")
+    axes[1].legend(
+        handles=[
+            Patch(facecolor=ABI_COLOR, alpha=0.72, label="ABI"),
+            Patch(facecolor=MCMC_COLOR, alpha=0.72, label="Matched MCMC"),
+        ],
+        frameon=False,
+    )
+    for axis in axes:
+        _style_axis(axis)
+    fig.tight_layout()
+    path = Path(output_dir) / "parameter_bias_interval_boxplots.png"
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    return fig
+
+
+def plot_boundary_metric_bars(tables: dict[str, pd.DataFrame], output_dir: Path):
+    summary = tables["edge_metric_method_summary"].set_index("method")
+    methods = [method for method in ("ABI", "Matched MCMC") if method in summary.index]
+    metrics = [
+        ("auroc_mean", "AUROC"),
+        ("average_precision_mean", "Average precision"),
+        ("brier_mean", "Brier score"),
+        ("sensitivity_mpm_mean", "MPM sensitivity"),
+        ("specificity_mpm_mean", "MPM specificity"),
+    ]
+    colors = [ABI_COLOR if method == "ABI" else MCMC_COLOR for method in methods]
+    fig, axes = plt.subplots(1, len(metrics), figsize=(17, 3.9), facecolor="white")
+    for axis, (column, title) in zip(axes, metrics):
+        values = [summary.loc[method, column] for method in methods]
+        axis.bar(methods, values, color=colors, alpha=0.82)
+        axis.set_title(title)
+        axis.tick_params(axis="x", rotation=30)
+        _style_axis(axis)
+    axes[0].set_ylabel("Mean across datasets")
+    fig.tight_layout()
+    path = Path(output_dir) / "boundary_metric_bars.png"
+    fig.savefig(path, dpi=180, bbox_inches="tight")
+    return fig
+
+
+def plot_runtime_comparison(tables: dict[str, pd.DataFrame], output_dir: Path):
+    runtime = tables["runtime_by_dataset"]
+    fig, axes = plt.subplots(1, 2, figsize=(12.5, 4.8), facecolor="white")
+    axes[0].scatter(
+        runtime["elapsed_sec_abi"],
+        runtime["elapsed_sec_mcmc"],
+        s=28,
+        color=ABI_COLOR,
+        alpha=0.70,
+    )
+    _equalize_xy_limits(axes[0])
+    axes[0].set_xlabel("ABI elapsed seconds")
+    axes[0].set_ylabel("Matched MCMC elapsed seconds")
+    axes[1].hist(
+        runtime["mcmc_to_abi_runtime_ratio"].dropna(),
+        bins=15,
+        color=ABI_COLOR,
+        alpha=0.82,
+        edgecolor="white",
+    )
+    axes[1].set_xlabel("Matched MCMC / ABI elapsed-time ratio")
+    axes[1].set_ylabel("Dataset count")
+    for axis in axes:
+        _style_axis(axis)
+    fig.tight_layout()
+    path = Path(output_dir) / "runtime_comparison.png"
     fig.savefig(path, dpi=180, bbox_inches="tight")
     return fig
 
