@@ -149,7 +149,6 @@ Core supplementary benchmark figures:
 | `$MCMC_CMP` | `parameter_recovery_agreement_scatter.png` | Supplementary dataset-level ABI--MCMC parameter agreement |
 | `$MCMC_CMP` | `parameter_bias_interval_boxplots.png` | Supplementary posterior-mean error and interval-width distributions |
 | `$MCMC_CMP` | `posterior_distribution_agreement.png` | Supplementary marginal posterior agreement |
-| `$MCMC_CMP` | `edge_probability_agreement.png` | Supplementary edge-probability agreement |
 | `$MCMC_CMP` | `boundary_metric_bars.png` | Supplementary truth-based boundary recovery |
 | `$MCMC_CMP` | `runtime_comparison.png` | Dataset-level runtime comparison and speedup distribution |
 
